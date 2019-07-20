@@ -1,6 +1,6 @@
 package io.usoamic.cli
 
-import io.usoamic.cli.core.Usoamic
+import io.usoamic.usoamickotlin.core.Usoamic
 import javax.inject.Inject
 
 
