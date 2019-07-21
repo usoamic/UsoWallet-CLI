@@ -74,7 +74,7 @@ class UsoWalletCli {
                     ValidateUtil.validatePassword(password)
                                 .validateAddress(to)
                                 .validateTransferValue(value)
-                    val txHash = usoamic.transferEther(password, to, value.toBigInteger())
+                    val txHash = usoamic.transferEth(password, to, value.toBigInteger())
                     println(txHash)
                 }
                 "uso_transfer" -> {
@@ -84,7 +84,7 @@ class UsoWalletCli {
                     ValidateUtil.validatePassword(password)
                                 .validateAddress(to)
                                 .validateTransferValue(value)
-                    val txHash = usoamic.transfer(password, to, value.toBigInteger())
+                    val txHash = usoamic.transferUso(password, to, value.toBigInteger())
                     println(txHash)
                 }
                 "burn" -> {
@@ -115,9 +115,10 @@ class UsoWalletCli {
                     val ideaId = args.getOrEmpty(2)
                     ValidateUtil.validateAddress(address)
                                 .validateId(ideaId)
-                    val idea = usoamic.getIdeaByAddress(address, ideaId.toBigInteger())
+                    val idea = usoamic.getIdeaByAuthor(address, ideaId.toBigInteger())
                     idea.printIfExist()
                 }
+                //Vote for idea
                 "support_idea" -> {
                     val password = args.getOrEmpty(1)
                     val ideaRefId = args.getOrEmpty(2)
@@ -143,7 +144,17 @@ class UsoWalletCli {
                     val vote = usoamic.getVote(ideaRefId.toBigInteger(), voteRefId.toBigInteger())
                     vote.printIfExist()
                 }
+                "get_vote_by_voter" -> {
+                    val ideaRefId = args.getOrEmpty(1)
+                    val voter = args.getOrEmpty(2)
+                    val voteId = args.getOrEmpty(3)
 
+                    ValidateUtil.validateAddress(voter)
+                                .validateIds(ideaRefId, voteId)
+
+                    val vote = usoamic.getVoteByVoter(voter, voteId.toBigInteger())
+                    vote.printIfExist()
+                }
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
