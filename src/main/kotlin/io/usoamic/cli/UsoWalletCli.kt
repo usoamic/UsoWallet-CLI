@@ -81,7 +81,7 @@ class UsoWalletCli {
                 }
                 "burn" -> {
                     val password = args.getOrEmpty(1)
-                    val value = args.getOrZero(3)
+                    val value = args.getOrZero(2)
                     ValidateUtil.validatePassword(password)
                     ValidateUtil.validateTransferValue(value)
                     val txHash = usoamic.burn(password, value.toBigInteger())
