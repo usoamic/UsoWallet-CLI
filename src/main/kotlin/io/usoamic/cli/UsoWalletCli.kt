@@ -24,10 +24,12 @@ class UsoWalletCli {
 
         try {
             val input = Scanner(System.`in`)
+            print("> ")
             val line = input.nextLine()
             val args = line.split(" ")
 
             when (args.getOrEmpty(0)) {
+                //add
                 "import_mnemonic_phrase" -> {
                     val mnemonicPhrase = args.getOrEmpty(1)
                     val password = args.getOrEmpty(2)
@@ -48,6 +50,7 @@ class UsoWalletCli {
                     val path = usoamic.importMnemonic(password, privateKey)
                     println("Path: $path")
                 }
+                //common
                 "get_address" -> {
                     println(usoamic.address)
                 }
@@ -89,6 +92,7 @@ class UsoWalletCli {
                     val txHash = usoamic.burn(password, value.toBigInteger())
                     println(txHash)
                 }
+                //idea
                 "get_idea" -> {
                     val ideaRefId = args.getOrEmpty(1)
                     ValidateUtil.validateId(ideaRefId)
@@ -103,6 +107,15 @@ class UsoWalletCli {
                     val idea = usoamic.getIdeaByAddress(address, ideaId.toBigInteger())
                     idea.printIfExist()
                 }
+                "get_vote" -> {
+                    val ideaRefId = args.getOrEmpty(1)
+                    val voteRefId = args.getOrEmpty(1)
+                    ValidateUtil.validateIds(ideaRefId, voteRefId)
+                    val vote = usoamic.getVote(ideaRefId.toBigInteger(), voteRefId.toBigInteger())
+                    vote.printIfExist()
+                }
+
+                //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
                     ValidateUtil.validateId(txId)
