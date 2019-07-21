@@ -10,6 +10,7 @@ import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
 import io.usoamic.usoamickotlin.util.Coin
 import org.web3j.utils.Convert
+import java.lang.Package.getPackage
 import java.math.BigInteger
 import java.util.*
 import javax.inject.Inject
@@ -105,7 +106,7 @@ class UsoWalletCli {
                         val supply = usoamic.getSupply()
                         println(supply)
                     }
-                    "get_version" -> {
+                    "get_contract_version" -> {
                         val version = usoamic.getVersion()
                         println(version)
                     }
