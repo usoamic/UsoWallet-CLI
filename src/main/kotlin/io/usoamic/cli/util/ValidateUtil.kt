@@ -15,6 +15,10 @@ class ValidateUtil {
             validateThatNotEmpty(description, "Description Required")
         }
 
+        fun validateNoteContent(content: String) = apply {
+            validateThatNotEmpty(content, "Note Content Required")
+        }
+
         fun validateComment(comment: String) = apply {
             validateThatNotEmpty(comment, "Comment Required")
         }
