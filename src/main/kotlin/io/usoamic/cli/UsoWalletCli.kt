@@ -1,8 +1,10 @@
 package io.usoamic.cli
 
+import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
+import io.usoamic.cli.util.printIfExist
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
@@ -91,17 +93,24 @@ class UsoWalletCli {
                     val ideaRefId = args.getOrEmpty(1)
                     ValidateUtil.validateId(ideaRefId)
                     val idea = usoamic.getIdea(ideaRefId.toBigInteger())
-                    println(idea)
+                    idea.printIfExist()
+                }
+                "get_idea_by_author" -> {
+                    val address = args.getOrEmpty(1)
+                    val ideaId = args.getOrEmpty(2)
+                    ValidateUtil.validateAddress(address)
+                    ValidateUtil.validateId(ideaId)
+                    val idea = usoamic.getIdeaByAddress(address, ideaId.toBigInteger())
+                    idea.printIfExist()
                 }
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
                     ValidateUtil.validateId(txId)
                     val transaction = usoamic.getTransaction(BigInteger.ONE)
-                    println(transaction)
+                    transaction.printIfExist()
                 }
             }
         } catch (e: Exception) {
-            e.printStackTrace()
             when (e) {
                 is InvalidMnemonicPhraseException -> {
                     println("Invalid Mnemonic Phrase")
@@ -109,8 +118,12 @@ class UsoWalletCli {
                 is InvalidPrivateKeyException -> {
                     println("Invalid Private Key")
                 }
+                is ObjectNotFoundException -> {
+                    println("Not found")
+                }
                 else -> {
                     println("Error: ${e.message}")
+                    e.printStackTrace()
                 }
             }
         }
