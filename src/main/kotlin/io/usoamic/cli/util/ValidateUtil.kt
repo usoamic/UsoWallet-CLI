@@ -52,6 +52,15 @@ class ValidateUtil {
             }
         }
 
+        fun validateFrozen(frozen: String) = apply {
+            if(frozen.isEmpty()) {
+                throw ValidateUtilException("Frozen Required")
+            }
+            if(frozen != "true" && frozen != "false") {
+                throw ValidateUtilException("Frozen must be bool")
+            }
+        }
+
         fun validateIds(vararg ids: String) = apply {
             for(id in ids) {
                 validateId(id)

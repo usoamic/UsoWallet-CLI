@@ -206,6 +206,22 @@ class UsoWalletCli {
                     val note = usoamic.getNote(noteRefId.toBigInteger())
                     note.printIfExist()
                 }
+                "set_frozen" -> {
+                    val password = args.getOrEmpty(1)
+                    val frozen = args.getOrEmpty(2)
+                    ValidateUtil.validatePassword(password)
+                                .validateFrozen(frozen)
+                    val txHash = usoamic.setFrozen(password, frozen.toBoolean())
+                    println(txHash)
+                }
+                "set_owner" -> {
+                    val password = args.getOrEmpty(1)
+                    val owner = args.getOrEmpty(2)
+                    ValidateUtil.validatePassword(password)
+                        .validateAddress(owner)
+                    val txHash = usoamic.setOwner(password, owner)
+                    println(txHash)
+                }
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
