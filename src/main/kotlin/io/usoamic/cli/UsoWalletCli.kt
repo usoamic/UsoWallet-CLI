@@ -26,7 +26,7 @@ class UsoWalletCli {
             val input = Scanner(System.`in`)
             print("> ")
             val line = input.nextLine()
-            val args = line.split(" ")
+            val args = line.split(" ") //TODO: Change delimiters
 
             when (args.getOrEmpty(0)) {
                 //add
@@ -35,7 +35,7 @@ class UsoWalletCli {
                     val password = args.getOrEmpty(2)
 
                     ValidateUtil.validateMnemonicPhrase(mnemonicPhrase)
-                    ValidateUtil.validatePassword(password)
+                                .validatePassword(password)
 
                     val path = usoamic.importMnemonic(password, mnemonicPhrase.replace(',', ' '))
                     println("Path: $path")
@@ -45,7 +45,7 @@ class UsoWalletCli {
                     val password = args.getOrEmpty(2)
 
                     ValidateUtil.validatePrivateKey(privateKey)
-                    ValidateUtil.validatePassword(password)
+                                .validatePassword(password)
 
                     val path = usoamic.importMnemonic(password, privateKey)
                     println("Path: $path")
@@ -69,8 +69,8 @@ class UsoWalletCli {
                     val to = args.getOrEmpty(2)
                     val value = args.getOrZero(3)
                     ValidateUtil.validatePassword(password)
-                    ValidateUtil.validateAddress(to)
-                    ValidateUtil.validateTransferValue(value)
+                                .validateAddress(to)
+                                .validateTransferValue(value)
                     val txHash = usoamic.transferEther(password, to, value.toBigInteger())
                     println(txHash)
                 }
@@ -79,8 +79,8 @@ class UsoWalletCli {
                     val to = args.getOrEmpty(2)
                     val value = args.getOrZero(3)
                     ValidateUtil.validatePassword(password)
-                    ValidateUtil.validateAddress(to)
-                    ValidateUtil.validateTransferValue(value)
+                                .validateAddress(to)
+                                .validateTransferValue(value)
                     val txHash = usoamic.transfer(password, to, value.toBigInteger())
                     println(txHash)
                 }
@@ -88,11 +88,19 @@ class UsoWalletCli {
                     val password = args.getOrEmpty(1)
                     val value = args.getOrZero(2)
                     ValidateUtil.validatePassword(password)
-                    ValidateUtil.validateTransferValue(value)
+                                .validateTransferValue(value)
                     val txHash = usoamic.burn(password, value.toBigInteger())
                     println(txHash)
                 }
                 //idea
+                "add_idea" -> {
+                    val password = args.getOrEmpty(1)
+                    val description = args.getOrEmpty(2)
+                    ValidateUtil.validatePassword(password)
+                                .validateDescription(description)
+                    val txHash = usoamic.addIdea(password, description)
+                    println(txHash)
+                }
                 "get_idea" -> {
                     val ideaRefId = args.getOrEmpty(1)
                     ValidateUtil.validateId(ideaRefId)
@@ -103,7 +111,7 @@ class UsoWalletCli {
                     val address = args.getOrEmpty(1)
                     val ideaId = args.getOrEmpty(2)
                     ValidateUtil.validateAddress(address)
-                    ValidateUtil.validateId(ideaId)
+                                .validateId(ideaId)
                     val idea = usoamic.getIdeaByAddress(address, ideaId.toBigInteger())
                     idea.printIfExist()
                 }
