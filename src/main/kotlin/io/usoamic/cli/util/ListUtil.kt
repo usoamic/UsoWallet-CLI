@@ -6,3 +6,10 @@ fun List<String>.getOrEmpty(index: Int): String {
     }
     return ""
 }
+
+fun List<String>.getOrZero(index: Int): String {
+    if (index in 0..lastIndex) {
+        return get(index)
+    }
+    return "0"
+}
