@@ -1,6 +1,7 @@
 package io.usoamic.cli.util
 
 import io.usoamic.cli.exception.ValidateUtilException
+import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import org.web3j.crypto.WalletUtils
 
 class ValidateUtil {
@@ -24,8 +25,8 @@ class ValidateUtil {
             }
         }
 
-        fun validateTransferValue(value: String): Int {
-            return value.toIntOrNull() ?: return 0
+        fun validateTransferValue(value: String) {
+            value.toIntOrNull() ?: throw ValidateUtilException("Invalid value")
         }
 
         private fun validateThatNotEmpty(str: String, message: String) {
