@@ -23,10 +23,13 @@ class UsoWalletCli {
         App.component.inject(this)
 
         try {
+            println("Address: ${usoamic.address}")
+
             val input = Scanner(System.`in`)
             print("> ")
             val line = input.nextLine()
             val args = line.split(" ") //TODO: Change delimiters
+
 
             when (args.getOrEmpty(0)) {
                 //add
@@ -115,9 +118,27 @@ class UsoWalletCli {
                     val idea = usoamic.getIdeaByAddress(address, ideaId.toBigInteger())
                     idea.printIfExist()
                 }
+                "support_idea" -> {
+                    val password = args.getOrEmpty(1)
+                    val ideaRefId = args.getOrEmpty(2)
+                    val comment = args.getOrEmpty(3)
+
+                    ValidateUtil.validatePassword(password)
+                        .validateId(ideaRefId)
+                        .validateComment(comment)
+
+                    val txHash = usoamic.supportIdea(password, ideaRefId.toBigInteger(), comment)
+                    println(txHash)
+                }
+                "abstain_idea" -> {
+                    //TODO: Fill block
+                }
+                "against_idea" -> {
+                    //TODO: Fill block
+                }
                 "get_vote" -> {
                     val ideaRefId = args.getOrEmpty(1)
-                    val voteRefId = args.getOrEmpty(1)
+                    val voteRefId = args.getOrEmpty(2)
                     ValidateUtil.validateIds(ideaRefId, voteRefId)
                     val vote = usoamic.getVote(ideaRefId.toBigInteger(), voteRefId.toBigInteger())
                     vote.printIfExist()
