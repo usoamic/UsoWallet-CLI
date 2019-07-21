@@ -154,6 +154,17 @@ class UsoWalletCli {
                     val vote = usoamic.getVoteByVoter(voter, voteId.toBigInteger())
                     vote.printIfExist()
                 }
+                "get_number_of_ideas_by_author" -> {
+                    val author = args.getOrEmpty(1)
+                    ValidateUtil.validateAddress(author)
+                    val numberOfIdeas = usoamic.getNumberOfIdeasByAuthor(author)
+                    println(numberOfIdeas)
+                }
+                "get_number_of_ideas" -> {
+                    val numberOfIdeas = usoamic.getNumberOfIdeas()
+                    println(numberOfIdeas)
+                }
+                //Notes
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
