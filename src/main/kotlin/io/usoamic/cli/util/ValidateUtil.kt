@@ -40,6 +40,12 @@ class ValidateUtil {
             }
         }
 
+        fun validateIds(vararg ids: String) {
+            for(id in ids) {
+                validateId(id)
+            }
+        }
+
         private fun validateThatNotEmpty(str: String, message: String) {
             if(str.isEmpty()) {
                 throw ValidateUtilException(message)
