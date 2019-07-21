@@ -87,9 +87,15 @@ class UsoWalletCli {
                     val txHash = usoamic.burn(password, value.toBigInteger())
                     println(txHash)
                 }
+                "get_idea" -> {
+                    val ideaRefId = args.getOrEmpty(1)
+                    ValidateUtil.validateId(ideaRefId)
+                    val idea = usoamic.getIdea(ideaRefId.toBigInteger())
+                    println(idea)
+                }
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
-                    ValidateUtil.validateTxId(txId)
+                    ValidateUtil.validateId(txId)
                     val transaction = usoamic.getTransaction(BigInteger.ONE)
                     println(transaction)
                 }
