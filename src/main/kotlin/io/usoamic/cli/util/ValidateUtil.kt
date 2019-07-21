@@ -21,7 +21,7 @@ class ValidateUtil {
 
         fun validateAddress(address: String) {
             validateThatNotEmpty(address, "Address Required")
-            if(WalletUtils.isValidAddress(address)) {
+            if(!WalletUtils.isValidAddress(address)) {
                 throw ValidateUtilException("Invalid Address")
             }
         }
