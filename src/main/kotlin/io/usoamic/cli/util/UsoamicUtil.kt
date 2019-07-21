@@ -10,26 +10,26 @@ fun Idea.printIfExist() {
     if (isExist) {
         println(this)
     }
-    throw ObjectNotFoundException()
+    else throw ObjectNotFoundException()
 }
 
 fun Transaction.printIfExist() {
     if (isExist) {
         println(this)
     }
-    throw ObjectNotFoundException()
+    else throw ObjectNotFoundException()
 }
 
 fun Vote.printIfExist() {
     if (isExist) {
         println(this)
     }
-    throw ObjectNotFoundException()
+    else throw ObjectNotFoundException()
 }
 
 fun Note.printIfExist() {
     if (isExist) {
         println(this)
     }
-    throw ObjectNotFoundException()
+    else throw ObjectNotFoundException()
 }
