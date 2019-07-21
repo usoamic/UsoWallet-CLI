@@ -33,6 +33,13 @@ class ValidateUtil {
             }
         }
 
+        fun validateTxId(txId: String) {
+            val intTxId = txId.toBigIntegerOrNull() ?: throw ValidateUtilException("Invalid TxId")
+            if(intTxId < BigInteger.ZERO) {
+                throw ValidateUtilException("TxId must be greater than or equal to zero")
+            }
+        }
+
         private fun validateThatNotEmpty(str: String, message: String) {
             if(str.isEmpty()) {
                 throw ValidateUtilException(message)
