@@ -198,6 +198,13 @@ class UsoWalletCli {
                     ValidateUtil.validateAddress(author)
                                 .validateId(noteId)
                     val note = usoamic.getNoteByAuthor(author, noteId.toBigInteger())
+                    note.printIfExist()
+                }
+                "get_note" -> {
+                    val noteRefId = args.getOrEmpty(2)
+                    ValidateUtil.validateId(noteRefId)
+                    val note = usoamic.getNote(noteRefId.toBigInteger())
+                    note.printIfExist()
                 }
                 //transactions
                 "get_transaction" -> {
