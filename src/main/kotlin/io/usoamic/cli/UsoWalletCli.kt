@@ -164,6 +164,12 @@ class UsoWalletCli {
                     val numberOfIdeas = usoamic.getNumberOfIdeas()
                     println(numberOfIdeas)
                 }
+                "get_number_of_votes_by_voter" -> {
+                    val voter = args.getOrEmpty(1)
+                    ValidateUtil.validateAddress(voter)
+                    val numberOfVotes = usoamic.getNumberOfVotesByVoter(voter)
+                    println(numberOfVotes)
+                }
                 //Notes
                 //transactions
                 "get_transaction" -> {
