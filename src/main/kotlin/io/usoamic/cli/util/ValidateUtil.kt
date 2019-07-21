@@ -52,13 +52,20 @@ class ValidateUtil {
             }
         }
 
+        fun validateSwappable(swappable: String) = apply {
+            validateBool(swappable, "Swappable")
+        }
+
         fun validateFrozen(frozen: String) = apply {
-            if(frozen.isEmpty()) {
-                throw ValidateUtilException("Frozen Required")
-            }
-            if(frozen != "true" && frozen != "false") {
-                throw ValidateUtilException("Frozen must be bool")
-            }
+            validateBool(frozen, "Frozen")
+        }
+
+        fun validateAppId(appId: String) = apply {
+            validateThatNotEmpty(appId, "AppId Required")
+        }
+
+        fun validatePurchaseId(purchaseId: String) = apply {
+            validateThatNotEmpty(purchaseId, "PurchaseId Required")
         }
 
         fun validateIds(vararg ids: String) = apply {
@@ -67,7 +74,16 @@ class ValidateUtil {
             }
         }
 
-        private fun validateThatNotEmpty(str: String, message: String) = apply {
+        private fun validateBool(bool: String, key: String) {
+            if(bool.isEmpty()) {
+                throw ValidateUtilException("$key Required")
+            }
+            if(bool != "true" && bool != "false") {
+                throw ValidateUtilException("$key must be bool")
+            }
+        }
+
+        private fun validateThatNotEmpty(str: String, message: String) {
             if(str.isEmpty()) {
                 throw ValidateUtilException(message)
             }
