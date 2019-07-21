@@ -192,7 +192,13 @@ class UsoWalletCli {
                     val numberOfNotes = usoamic.getNumberOfNotesByAuthor(author)
                     println(numberOfNotes)
                 }
-
+                "get_note_by_author" -> {
+                    val author = args.getOrEmpty(1)
+                    val noteId = args.getOrEmpty(2)
+                    ValidateUtil.validateAddress(author)
+                                .validateId(noteId)
+                    val note = usoamic.getNoteByAuthor(author, noteId.toBigInteger())
+                }
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
