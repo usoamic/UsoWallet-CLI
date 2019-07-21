@@ -182,6 +182,17 @@ class UsoWalletCli {
                 "add_unlisted_note" -> {
                     //TODO: Fill code block
                 }
+                "get_number_of_public_notes" -> {
+                    val numberOfNotes = usoamic.getNumberOfPublicNotes()
+                    println(numberOfNotes)
+                }
+                "get_number_of_notes_by_author" -> {
+                    val author = args.getOrEmpty(1)
+                    ValidateUtil.validateAddress(author)
+                    val numberOfNotes = usoamic.getNumberOfNotesByAuthor(author)
+                    println(numberOfNotes)
+                }
+
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
