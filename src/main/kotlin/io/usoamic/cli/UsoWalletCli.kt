@@ -171,6 +171,17 @@ class UsoWalletCli {
                     println(numberOfVotes)
                 }
                 //Notes
+                "add_public_note" -> {
+                    val password = args.getOrEmpty(1)
+                    val content = args.getOrEmpty(2)
+                    ValidateUtil.validatePassword(password)
+                                .validateDescription(content)
+                    val txHash = usoamic.addIdea(password, content)
+                    println(txHash)
+                }
+                "add_unlisted_note" -> {
+                    //TODO: Fill code block
+                }
                 //transactions
                 "get_transaction" -> {
                     val txId = args.getOrEmpty(1)
