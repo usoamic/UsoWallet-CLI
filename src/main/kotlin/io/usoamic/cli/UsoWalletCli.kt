@@ -72,7 +72,6 @@ class UsoWalletCli {
                 }
             }
         } catch (e: Exception) {
-            println(e.message)
             when (e) {
                 is InvalidMnemonicPhraseException -> {
                     println("Invalid Mnemonic Phrase")
