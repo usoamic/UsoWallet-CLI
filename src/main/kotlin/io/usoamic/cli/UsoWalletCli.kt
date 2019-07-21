@@ -145,12 +145,11 @@ class UsoWalletCli {
                     vote.printIfExist()
                 }
                 "get_vote_by_voter" -> {
-                    val ideaRefId = args.getOrEmpty(1)
-                    val voter = args.getOrEmpty(2)
-                    val voteId = args.getOrEmpty(3)
+                    val voter = args.getOrEmpty(1)
+                    val voteId = args.getOrEmpty(2)
 
                     ValidateUtil.validateAddress(voter)
-                                .validateIds(ideaRefId, voteId)
+                                .validateId(voteId)
 
                     val vote = usoamic.getVoteByVoter(voter, voteId.toBigInteger())
                     vote.printIfExist()
