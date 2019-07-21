@@ -3,6 +3,7 @@ package io.usoamic.cli.util
 import io.usoamic.cli.exception.ValidateUtilException
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import org.web3j.crypto.WalletUtils
+import java.math.BigInteger
 
 class ValidateUtil {
     companion object {
@@ -26,7 +27,10 @@ class ValidateUtil {
         }
 
         fun validateTransferValue(value: String) {
-            value.toIntOrNull() ?: throw ValidateUtilException("Invalid value")
+            val intValue = value.toBigIntegerOrNull() ?: throw ValidateUtilException("Value Required")
+            if(intValue >= BigInteger.ZERO) {
+                throw ValidateUtilException("Invalid Value")
+            }
         }
 
         private fun validateThatNotEmpty(str: String, message: String) {
