@@ -28,15 +28,15 @@ class ValidateUtil {
 
         fun validateTransferValue(value: String) {
             val intValue = value.toBigIntegerOrNull() ?: throw ValidateUtilException("Value Required")
-            if(intValue < BigInteger.ZERO) {
+            if(intValue > BigInteger.ZERO) {
                 throw ValidateUtilException("Invalid Value")
             }
         }
 
-        fun validateTxId(txId: String) {
-            val intTxId = txId.toBigIntegerOrNull() ?: throw ValidateUtilException("Invalid TxId")
-            if(intTxId < BigInteger.ZERO) {
-                throw ValidateUtilException("TxId must be greater than or equal to zero")
+        fun validateId(id: String) {
+            val intId = id.toBigIntegerOrNull() ?: throw ValidateUtilException("Invalid Id")
+            if(intId < BigInteger.ZERO) {
+                throw ValidateUtilException("Id must be greater than or equal to zero")
             }
         }
 
