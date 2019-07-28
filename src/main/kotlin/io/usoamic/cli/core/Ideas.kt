@@ -36,17 +36,11 @@ class Ideas {
         return usoamic.getIdeaByAuthor(address, ideaId.toBigInteger())
     }
 
-    fun supportIdea(args: List<String>): String {
-        return voteForIdea(VoteType.SUPPORT, args)
-    }
+    fun supportIdea(args: List<String>): String = voteForIdea(VoteType.SUPPORT, args)
 
-    fun abstainIdea(args: List<String>): String {
-        return voteForIdea(VoteType.ABSTAIN, args)
-    }
+    fun abstainIdea(args: List<String>): String = voteForIdea(VoteType.ABSTAIN, args)
 
-    fun againstIdea(args: List<String>): String {
-        return voteForIdea(VoteType.AGAINST, args)
-    }
+    fun againstIdea(args: List<String>): String = voteForIdea(VoteType.AGAINST, args)
 
     fun getVote(args: List<String>): Vote {
         val ideaRefId = args.getOrEmpty(1)
