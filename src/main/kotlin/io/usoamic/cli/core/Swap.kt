@@ -34,7 +34,6 @@ class Swap @Inject constructor(private val usoamic: Usoamic) {
                     .validateTransferValue(value)
 
         val bdValue = Coin.fromCoin(value).toSat()
-
         return usoamic.burnSwap(password, bdValue)
     }
 
