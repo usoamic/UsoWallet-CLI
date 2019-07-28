@@ -28,7 +28,7 @@ class Core @Inject constructor(
             "eth_transfer" -> usoamic.transferEth(args)
             "uso_transfer" -> usoamic.transferUso(args)
             "get_version" -> usoamic.getVersion()
-            "burn" -> usoamic.burnUso(args)
+            "burn_uso" -> usoamic.burnUso(args)
             "uso_balance_of" -> usoamic.usoBalanceOf(args).toString()
             "eth_balance_of" -> usoamic.ethBalanceOf(args).toString()
             "get_supply" -> usoamic.getSupply().toString()
