@@ -2,13 +2,11 @@ package io.usoamic.testcli
 
 import io.usoamic.cli.Core
 import io.usoamic.testcli.other.TestConfig
+import io.usoamic.testcli.util.Utils
 import io.usoamic.usoamickotlin.core.Usoamic
 import org.junit.jupiter.api.Test
-import org.web3j.crypto.Credentials
-import org.web3j.crypto.Keys
 import org.web3j.crypto.WalletUtils
 import java.math.BigDecimal
-import java.math.BigInteger
 import javax.inject.Inject
 
 class UsoamicTest {
@@ -46,12 +44,12 @@ class UsoamicTest {
             println("Need more tokens: $value")
         }
 
-        val bobCredentials = Credentials.create(Keys.createEcKeyPair())
+        val bobAddress = Utils.getNewAddress()
 
-        val txHash = core.getResponse("eth_transfer ${TestConfig.PASSWORD} ${bobCredentials.address} $value")
+        val txHash = core.getResponse("eth_transfer ${TestConfig.PASSWORD} $bobAddress $value")
         usoamic.waitTransactionReceipt(txHash) {
             val newAliceBalance = core.getResponse("get_eth_balance")
-            val newBobBalance = core.getResponse("eth_balance_of ${bobCredentials.address}")
+            val newBobBalance = core.run { getResponse("eth_balance_of $bobAddress") }
             assert(newAliceBalance.toBigDecimal() < aliceBalance.toBigDecimal())
             assert(newBobBalance.toBigDecimal() == value)
         }
@@ -66,12 +64,12 @@ class UsoamicTest {
             println("Need more tokens: $value")
         }
 
-        val bobCredentials = Credentials.create(Keys.createEcKeyPair())
+        val bobAddress = Utils.getNewAddress()
 
-        val txHash = core.getResponse("uso_transfer ${TestConfig.PASSWORD} ${bobCredentials.address} $value")
+        val txHash = core.getResponse("uso_transfer ${TestConfig.PASSWORD} $bobAddress $value")
         usoamic.waitTransactionReceipt(txHash) {
             val newAliceBalance = core.getResponse("get_uso_balance")
-            val newBobBalance = core.getResponse("uso_balance_of ${bobCredentials.address}")
+            val newBobBalance = core.getResponse("uso_balance_of $bobAddress")
             assert(newAliceBalance.toBigDecimal() < aliceBalance.toBigDecimal())
             println("@newBobBalance: $newBobBalance")
             assert(newBobBalance.toBigDecimal().compareTo(value) == 0)
