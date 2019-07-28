@@ -30,18 +30,21 @@ class SwapTest {
 
     @Test
     fun burnSwapTest() {
-        val value = BigDecimal(500)
-        val usoBalance = core.getResponse("uso_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
-        val ethBalance = core.getResponse("eth_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
+        val swappable = usoamic.getSwappable()
+        if(swappable!!) {
+            val value = BigDecimal(500)
+            val usoBalance = core.getResponse("uso_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
+            val ethBalance = core.getResponse("eth_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
 
-        val txHash = core.getResponse("burn_swap ${TestConfig.PASSWORD} $value")
+            val txHash = core.getResponse("burn_swap ${TestConfig.PASSWORD} $value")
 
-        usoamic.waitTransactionReceipt(txHash) {
-            assert(it.status != "0x0")
-            val newUsoBalance = core.getResponse("uso_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
-            val newEthBalance = core.getResponse("eth_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
-            assert(usoBalance > newUsoBalance)
-            assert(ethBalance < newEthBalance)
+            usoamic.waitTransactionReceipt(txHash) {
+                assert(it.status != "0x0")
+                val newUsoBalance = core.getResponse("uso_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
+                val newEthBalance = core.getResponse("eth_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
+                assert(usoBalance > newUsoBalance)
+                assert(ethBalance < newEthBalance)
+            }
         }
     }
 
