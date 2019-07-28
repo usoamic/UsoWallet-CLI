@@ -1,5 +1,6 @@
 package io.usoamic.cli
 
+import io.usoamic.cli.core.AccountManager
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
@@ -20,6 +21,9 @@ class UsoWalletCli {
     @Inject
     lateinit var usoamic: Usoamic
 
+    @Inject
+    lateinit var accountManager: AccountManager
+
     init {
         App.component.inject(this)
 
@@ -35,24 +39,10 @@ class UsoWalletCli {
                 when (args.getOrEmpty(0)) {
                     //add
                     "import_mnemonic_phrase" -> {
-                        val mnemonicPhrase = args.getOrEmpty(1)
-                        val password = args.getOrEmpty(2)
-
-                        ValidateUtil.validateMnemonicPhrase(mnemonicPhrase)
-                            .validatePassword(password)
-
-                        val path = usoamic.importMnemonic(password, mnemonicPhrase.replace(',', ' '))
-                        println("Path: $path")
+                        println(accountManager.importMnemonicPhrase(args))
                     }
                     "import_private_key" -> {
-                        val privateKey = args.getOrEmpty(1)
-                        val password = args.getOrEmpty(2)
-
-                        ValidateUtil.validatePrivateKey(privateKey)
-                            .validatePassword(password)
-
-                        val path = usoamic.importMnemonic(password, privateKey)
-                        println("Path: $path")
+                        println(accountManager.importPrivateKey(args))
                     }
                     //common
                     "get_address" -> {
