@@ -3,37 +3,37 @@ package io.usoamic.cli.util
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.usoamickotlin.model.*
 
-fun Idea.printIfExist() {
+fun Idea.toStringIfExist(): String {
     if (isExist) {
-        println(this)
+        return this.toString()
     }
     else throw ObjectNotFoundException()
 }
 
-fun Transaction.printIfExist() {
+fun Transaction.toStringIfExist(): String {
     if (isExist) {
-        println(this)
+        return this.toString()
     }
     else throw ObjectNotFoundException()
 }
 
-fun Vote.printIfExist() {
+fun Vote.toStringIfExist(): String {
     if (isExist) {
-        println(this)
+        return this.toString()
     }
     else throw ObjectNotFoundException()
 }
 
-fun Note.printIfExist() {
+fun Note.toStringIfExist(): String {
     if (isExist) {
-        println(this)
+        return this.toString()
     }
     else throw ObjectNotFoundException()
 }
 
-fun Purchase.printIfExist() {
+fun Purchase.toStringIfExist(): String {
     if (isExist) {
-        println(this)
+        return this.toString()
     }
     else throw ObjectNotFoundException()
 }
