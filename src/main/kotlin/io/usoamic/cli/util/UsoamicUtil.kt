@@ -7,33 +7,33 @@ fun Idea.toStringIfExist(): String {
     if (isExist) {
         return this.toString()
     }
-    else throw ObjectNotFoundException()
+    throw ObjectNotFoundException()
 }
 
 fun Transaction.toStringIfExist(): String {
     if (isExist) {
         return this.toString()
     }
-    else throw ObjectNotFoundException()
+    throw ObjectNotFoundException()
 }
 
 fun Vote.toStringIfExist(): String {
     if (isExist) {
         return this.toString()
     }
-    else throw ObjectNotFoundException()
+    throw ObjectNotFoundException()
 }
 
 fun Note.toStringIfExist(): String {
     if (isExist) {
         return this.toString()
     }
-    else throw ObjectNotFoundException()
+    throw ObjectNotFoundException()
 }
 
 fun Purchase.toStringIfExist(): String {
     if (isExist) {
         return this.toString()
     }
-    else throw ObjectNotFoundException()
+    throw ObjectNotFoundException()
 }
