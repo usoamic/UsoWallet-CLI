@@ -66,6 +66,9 @@ class UsoWalletCli {
                     is ContractNullPointerException -> {
                         println("Response is null")
                     }
+                    is CommandNotFoundException -> {
+                        println("Command Not Found")
+                    }
                     else -> {
                         println("Error: ${e.message}")
                         e.printStackTrace()
