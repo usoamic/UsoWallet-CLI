@@ -13,30 +13,14 @@ import javax.inject.Inject
 
 
 class UsoWalletCli {
-    @Inject
-    lateinit var accountManager: AccountManager
-
-    @Inject
-    lateinit var ideas: Ideas
-
-    @Inject
-    lateinit var notes: Notes
-
-    @Inject
-    lateinit var owner: Owner
-
-    @Inject
-    lateinit var purchases: Purchases
-
-    @Inject
-    lateinit var swap: Swap
-
-    @Inject
-    lateinit var transactionExplorer: TransactionExplorer
-
-    @Inject
-    lateinit var usoamic: Usoamic
-
+    @Inject lateinit var accountManager: AccountManager
+    @Inject lateinit var ideas: Ideas
+    @Inject lateinit var notes: Notes
+    @Inject lateinit var owner: Owner
+    @Inject lateinit var purchases: Purchases
+    @Inject lateinit var swap: Swap
+    @Inject lateinit var transactionExplorer: TransactionExplorer
+    @Inject lateinit var usoamic: Usoamic
 
     init {
         App.component.inject(this)
