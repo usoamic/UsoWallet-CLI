@@ -1,6 +1,7 @@
 package io.usoamic.cli
 
 import io.usoamic.cli.core.AccountManager
+import io.usoamic.cli.core.Ideas
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
@@ -18,10 +19,12 @@ import javax.inject.Inject
 
 class UsoWalletCli {
     @Inject
+    lateinit var accountManager: AccountManager
+    @Inject
+    lateinit var ideas: Ideas
+    @Inject
     lateinit var usoamic: Usoamic
 
-    @Inject
-    lateinit var accountManager: AccountManager
 
     init {
         App.component.inject(this)
@@ -73,78 +76,38 @@ class UsoWalletCli {
                     }
                     //idea
                     "add_idea" -> {
-                        val password = args.getOrEmpty(1)
-                        val description = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateDescription(description)
-                        val txHash = usoamic.addIdea(password, description)
-                        println(txHash)
+                        println(ideas.addIdea(args))
                     }
                     "get_idea" -> {
-                        val ideaRefId = args.getOrEmpty(1)
-                        ValidateUtil.validateId(ideaRefId)
-                        val idea = usoamic.getIdea(ideaRefId.toBigInteger())
-                        idea.printIfExist()
+                        ideas.getIdea(args).printIfExist()
                     }
                     "get_idea_by_author" -> {
-                        val address = args.getOrEmpty(1)
-                        val ideaId = args.getOrEmpty(2)
-                        ValidateUtil.validateAddress(address)
-                            .validateId(ideaId)
-                        val idea = usoamic.getIdeaByAuthor(address, ideaId.toBigInteger())
-                        idea.printIfExist()
+                        ideas.getIdeasByAuthor(args).printIfExist()
                     }
                     //Vote for idea
                     "support_idea" -> {
-                        val password = args.getOrEmpty(1)
-                        val ideaRefId = args.getOrEmpty(2)
-                        val comment = args.getOrEmpty(3)
-
-                        ValidateUtil.validatePassword(password)
-                            .validateId(ideaRefId)
-                            .validateComment(comment)
-
-                        val txHash = usoamic.supportIdea(password, ideaRefId.toBigInteger(), comment)
-                        println(txHash)
+                        println(ideas.supportIdea(args))
                     }
                     "abstain_idea" -> {
-                        //TODO: Fill block
+                        println(ideas.abstainIdea(args))
                     }
                     "against_idea" -> {
-                        //TODO: Fill block
+                        println(ideas.againstIdea(args))
                     }
                     "get_vote" -> {
-                        val ideaRefId = args.getOrEmpty(1)
-                        val voteRefId = args.getOrEmpty(2)
-                        ValidateUtil.validateIds(ideaRefId, voteRefId)
-                        val vote = usoamic.getVote(ideaRefId.toBigInteger(), voteRefId.toBigInteger())
-                        vote.printIfExist()
+                        ideas.getVote(args).printIfExist()
                     }
                     "get_vote_by_voter" -> {
-                        val voter = args.getOrEmpty(1)
-                        val voteId = args.getOrEmpty(2)
-
-                        ValidateUtil.validateAddress(voter)
-                            .validateId(voteId)
-
-                        val vote = usoamic.getVoteByVoter(voter, voteId.toBigInteger())
-                        vote.printIfExist()
+                        ideas.getVoteByVoter(args).printIfExist()
                     }
                     "get_number_of_ideas_by_author" -> {
-                        val author = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(author)
-                        val numberOfIdeas = usoamic.getNumberOfIdeasByAuthor(author)
-                        println(numberOfIdeas)
+                        println(ideas.getNumberOfIdeasByAuthor(args))
                     }
                     "get_number_of_ideas" -> {
-                        val numberOfIdeas = usoamic.getNumberOfIdeas()
-                        println(numberOfIdeas)
+                        println(ideas.getNumberOfIdeas())
                     }
                     "get_number_of_votes_by_voter" -> {
-                        val voter = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(voter)
-                        val numberOfVotes = usoamic.getNumberOfVotesByVoter(voter)
-                        println(numberOfVotes)
+                        println(ideas.getNumberOfVotesByVoter(args))
                     }
                     //Notes
                     "add_public_note" -> {
