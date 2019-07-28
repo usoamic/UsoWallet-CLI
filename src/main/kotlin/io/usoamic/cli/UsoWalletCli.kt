@@ -31,7 +31,7 @@ class UsoWalletCli {
         while (input.hasNextLine()) {
             try {
                 val line = input.nextLine()
-                val args = line.split(" ") //TODO: Change delimiters
+                val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
                 when (args.getOrEmpty(0)) {
                     //add
                     "import_mnemonic_phrase" -> {
@@ -265,7 +265,7 @@ class UsoWalletCli {
                         val address = args.getOrEmpty(1)
                         ValidateUtil.validateAddress(address)
 
-                        val numberOfPurchases = usoamic.getNumberOfPurchaseByAddress(address)
+                        val numberOfPurchases = usoamic.getNumberOfPurchasesByAddress(address)
                         println(numberOfPurchases)
                     }
                     //Swap
