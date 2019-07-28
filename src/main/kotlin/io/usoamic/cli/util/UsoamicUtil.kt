@@ -37,3 +37,7 @@ fun Purchase.toStringIfExist(): String {
     }
     throw ObjectNotFoundException()
 }
+
+fun String.removeQuotes(): String {
+    return this.replace("'", "")
+}

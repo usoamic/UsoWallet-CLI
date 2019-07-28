@@ -3,6 +3,7 @@ package io.usoamic.cli
 import io.usoamic.cli.core.*
 import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.util.getOrEmpty
+import io.usoamic.cli.util.removeQuotes
 import io.usoamic.cli.util.toStringIfExist
 import javax.inject.Inject
 
@@ -18,7 +19,9 @@ class Core @Inject constructor(
 ) {
     fun getResponse(line: String): String {
         println("@line: $line")
-        val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
+        val args = line.split(Regex(" (?=(?:[^\\\']*\\\'[^\\\']*\\\')*[^\\\']*\$)"))
+                                   .map { it.removeQuotes() }
+
         return when (args.getOrEmpty(0)) {
             "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
             "import_private_key" -> accountManager.importPrivateKey(args)
