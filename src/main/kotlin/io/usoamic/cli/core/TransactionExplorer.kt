@@ -12,7 +12,7 @@ class TransactionExplorer @Inject constructor(private val usoamic: Usoamic) {
     fun getTransaction(args: List<String>): Transaction {
         val txId = args.getOrEmpty(1)
         ValidateUtil.validateId(txId)
-        return usoamic.getTransaction(BigInteger.ONE)
+        return usoamic.getTransaction(txId.toBigInteger())
     }
 
     fun getNumberOfTransactions(): BigInteger {
