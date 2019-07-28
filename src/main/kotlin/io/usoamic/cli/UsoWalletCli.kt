@@ -6,12 +6,11 @@ import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
 import io.usoamic.cli.util.printIfExist
-import io.usoamic.usoamickotlin.core.Usoamic
+import io.usoamic.cli.core.Usoamic
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
 import io.usoamic.usoamickotlin.util.Coin
 import org.web3j.utils.Convert
-import java.lang.Package.getPackage
 import java.math.BigInteger
 import java.util.*
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class UsoWalletCli {
         App.component.inject(this)
 
 
-        println("Address: ${usoamic.address}")
+        println("Address: ${usoamic.getAddress()}")
 
         val input = Scanner(System.`in`)
         print("> ")
@@ -46,59 +45,31 @@ class UsoWalletCli {
                     }
                     //common
                     "get_address" -> {
-                        println(usoamic.address)
+                        println(usoamic.getAddress())
                     }
                     "get_eth_balance" -> {
-                        val weiBalance = usoamic.getEthBalance()
-                        val ethBalance = Convert.fromWei(weiBalance.toBigDecimal(), Convert.Unit.ETHER)
-                        println(ethBalance.toPlainString())
+                        println(usoamic.getEthBalance())
                     }
                     "get_uso_balance" -> {
-                        val satBalance = usoamic.getUsoBalance()
-                        val coinBalance = Coin.fromSat(satBalance!!).toBigDecimal()
-                        println(coinBalance.toPlainString())
+                        println(usoamic.getUsoBalance())
                     }
                     "eth_transfer" -> {
-                        val password = args.getOrEmpty(1)
-                        val to = args.getOrEmpty(2)
-                        val value = args.getOrZero(3)
-                        ValidateUtil.validatePassword(password)
-                            .validateAddress(to)
-                            .validateTransferValue(value)
-                        val txHash = usoamic.transferEth(password, to, value.toBigInteger())
-                        println(txHash)
+                        println(usoamic.transferEth(args))
                     }
                     "uso_transfer" -> {
-                        val password = args.getOrEmpty(1)
-                        val to = args.getOrEmpty(2)
-                        val value = args.getOrZero(3)
-                        ValidateUtil.validatePassword(password)
-                            .validateAddress(to)
-                            .validateTransferValue(value)
-                        val txHash = usoamic.transferUso(password, to, value.toBigInteger())
-                        println(txHash)
+                        println(usoamic.transferUso(args))
                     }
                     "burn" -> {
-                        val password = args.getOrEmpty(1)
-                        val value = args.getOrZero(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateTransferValue(value)
-                        val txHash = usoamic.burn(password, value.toBigInteger())
-                        println(txHash)
+                        println(usoamic.burnUso(args))
                     }
                     "balance_of" -> {
-                        val address = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(address)
-                        val balance = usoamic.balanceOf(address)
-                        println(balance)
+                        println(usoamic.balanceOf(args))
                     }
                     "get_supply" -> {
-                        val supply = usoamic.getSupply()
-                        println(supply)
+                        println(usoamic.getSupply())
                     }
                     "get_contract_version" -> {
-                        val version = usoamic.getVersion()
-                        println(version)
+                        println(usoamic.getVersion())
                     }
                     //idea
                     "add_idea" -> {
