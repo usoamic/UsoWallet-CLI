@@ -1,6 +1,7 @@
 package io.usoamic.cli.di
 
 import dagger.Component
+import io.usoamic.cli.Core
 import io.usoamic.cli.UsoWalletCli
 import io.usoamic.cli.core.*
 import javax.inject.Singleton
@@ -17,4 +18,5 @@ interface AppComponent {
     fun inject(clazz: TransactionExplorer)
     fun inject(clazz: Usoamic)
     fun inject(clazz: AccountManager)
+    fun inject(clazz: Core)
 }
