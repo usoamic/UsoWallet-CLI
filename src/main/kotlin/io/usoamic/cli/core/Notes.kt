@@ -10,7 +10,7 @@ import java.math.BigInteger
 import javax.inject.Inject
 
 class Notes @Inject constructor(private val usoamic: Usoamic) {
-    fun addPublicNote(args: List<String>): String = addNote( NoteVisibility.PUBLIC, args)
+    fun addPublicNote(args: List<String>): String = addNote(NoteVisibility.PUBLIC, args)
 
     fun addUnlistedNote(args: List<String>): String = addNote(NoteVisibility.UNLISTED, args)
 
@@ -39,7 +39,7 @@ class Notes @Inject constructor(private val usoamic: Usoamic) {
     }
 
     fun getNote(args: List<String>): Note {
-        val noteRefId = args.getOrEmpty(2)
+        val noteRefId = args.getOrEmpty(1)
         ValidateUtil.validateId(noteRefId)
         return usoamic.getNote(noteRefId.toBigInteger())
     }
