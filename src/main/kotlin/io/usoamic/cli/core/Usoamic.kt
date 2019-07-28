@@ -45,19 +45,21 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
     fun transferUso(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val to = args.getOrEmpty(2)
-        val value = args.getOrZero(3)
+        val sValue = args.getOrZero(3)
+        val value = Coin.fromCoin(sValue).toSat()
         ValidateUtil.validatePassword(password)
             .validateAddress(to)
-            .validateTransferValue(value)
-        return usoamic.transferUso(password, to, value.toBigInteger())
+            .validateTransferValue(value.toString())
+        return usoamic.transferUso(password, to, value)
     }
 
     fun burnUso(args: List<String>): String {
         val password = args.getOrEmpty(1)
-        val value = args.getOrZero(2)
+        val sValue = args.getOrZero(2)
+        val value = Coin.fromCoin(sValue).toSat()
         ValidateUtil.validatePassword(password)
-            .validateTransferValue(value)
-        return usoamic.burn(password, value.toBigInteger())
+            .validateTransferValue(value.toString())
+        return usoamic.burn(password, value)
     }
 
     fun usoBalanceOf(args: List<String>): BigDecimal {
