@@ -1,14 +1,11 @@
 package io.usoamic.cli
 
-import io.usoamic.cli.core.AccountManager
-import io.usoamic.cli.core.Ideas
-import io.usoamic.cli.core.Notes
+import io.usoamic.cli.core.*
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
 import io.usoamic.cli.util.printIfExist
-import io.usoamic.cli.core.Usoamic
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
 import io.usoamic.usoamickotlin.util.Coin
@@ -25,6 +22,8 @@ class UsoWalletCli {
     lateinit var ideas: Ideas
     @Inject
     lateinit var notes: Notes
+    @Inject
+    lateinit var owner: Owner
     @Inject
     lateinit var usoamic: Usoamic
 
@@ -133,20 +132,10 @@ class UsoWalletCli {
                     }
                     //Owner
                     "set_frozen" -> {
-                        val password = args.getOrEmpty(1)
-                        val frozen = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateFrozen(frozen)
-                        val txHash = usoamic.setFrozen(password, frozen.toBoolean())
-                        println(txHash)
+                        println(owner.setFrozen(args))
                     }
                     "set_owner" -> {
-                        val password = args.getOrEmpty(1)
-                        val owner = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateAddress(owner)
-                        val txHash = usoamic.setOwner(password, owner)
-                        println(txHash)
+                        println(owner.setOwner(args))
                     }
                     //Purchases
                     "make_purchase" -> {

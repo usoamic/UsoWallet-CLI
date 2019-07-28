@@ -4,6 +4,7 @@ import dagger.Provides
 import io.usoamic.cli.core.AccountManager
 import io.usoamic.cli.core.Ideas
 import io.usoamic.cli.core.Notes
+import io.usoamic.cli.core.Owner
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.other.Config
 import javax.inject.Singleton
@@ -25,5 +26,11 @@ class CoreModule {
     @Singleton
     fun provideNotes(): Notes {
         return Notes()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOwner(): Owner {
+        return Owner()
     }
 }
