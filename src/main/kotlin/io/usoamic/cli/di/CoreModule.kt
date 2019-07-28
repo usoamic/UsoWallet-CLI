@@ -36,4 +36,10 @@ class CoreModule {
     fun providePurchases(): Purchases {
         return Purchases()
     }
+
+    @Provides
+    @Singleton
+    fun provideSwap(): Swap {
+        return Swap()
+    }
 }

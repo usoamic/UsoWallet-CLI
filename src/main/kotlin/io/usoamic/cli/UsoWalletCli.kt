@@ -18,14 +18,22 @@ import javax.inject.Inject
 class UsoWalletCli {
     @Inject
     lateinit var accountManager: AccountManager
+
     @Inject
     lateinit var ideas: Ideas
+
     @Inject
     lateinit var notes: Notes
+
     @Inject
     lateinit var owner: Owner
+
     @Inject
     lateinit var purchases: Purchases
+
+    @Inject
+    lateinit var swap: Swap
+
     @Inject
     lateinit var usoamic: Usoamic
 
@@ -151,48 +159,25 @@ class UsoWalletCli {
                     }
                     //Swap
                     "withdraw_eth" -> {
-                        val password = args.getOrEmpty(1)
-                        val value = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateTransferValue(value)
-                        val txHash = usoamic.withdrawEth(password, value.toBigInteger())
-                        println(txHash)
+                        println(swap.withdrawEth(args))
                     }
                     "burn_swap" -> {
-                        val password = args.getOrEmpty(1)
-                        val value = args.getOrZero(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateTransferValue(value)
-                        val txHash = usoamic.burnSwap(password, value.toBigInteger())
-                        println(txHash)
+                        println(swap.burnSwap(args))
                     }
                     "set_swap_rate" -> {
-                        val password = args.getOrEmpty(1)
-                        val swapRate = args.getOrZero(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateTransferValue(swapRate)
-                        val txHash = usoamic.setSwapRate(password, swapRate.toBigInteger())
-                        println(txHash)
+                        println(swap.setSwapRate(args))
                     }
                     "set_swappable" -> {
-                        val password = args.getOrEmpty(1)
-                        val swappable = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateSwappable(swappable)
-                        val txHash = usoamic.setFrozen(password, swappable.toBoolean())
-                        println(txHash)
+                        println(swap.setSwappable(args))
                     }
                     "get_swap_balance" -> {
-                        val swapBalance = usoamic.getSwapBalance()
-                        println(swapBalance)
+                        println(swap.usoamic)
                     }
                     "get_swap_rate" -> {
-                        val swapRate = usoamic.getSwapRate()
-                        println(swapRate)
+                        println(swap.getSwapRate())
                     }
                     "get_swappable" -> {
-                        val swappable = usoamic.getSwappable()
-                        println(swappable)
+                        println(swap.getSwappable())
                     }
                     //transactions
                     "get_transaction" -> {
