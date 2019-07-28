@@ -54,7 +54,7 @@ class Core @Inject constructor(
             "set_owner" -> owner.setOwner(args)
             "make_purchase" -> purchases.makePurchase(args)
             "get_purchase_by_address" -> purchases.getPurchaseByAddress(args).toStringIfExist()
-            "get_number_of_purchase_by_address" -> purchases.getNumberOfPurchasesByAddress(args).toString()
+            "get_number_of_purchases_by_address" -> purchases.getNumberOfPurchasesByAddress(args).toString()
             "withdraw_eth" -> swap.withdrawEth(args)
             "burn_swap" -> swap.burnSwap(args)
             "set_swap_rate" -> swap.setSwapRate(args)
