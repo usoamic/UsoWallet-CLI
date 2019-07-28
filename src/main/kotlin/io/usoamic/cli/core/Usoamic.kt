@@ -71,10 +71,7 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
     fun ethBalanceOf(args: List<String>): BigInteger {
         val address = args.getOrEmpty(1)
         ValidateUtil.validateAddress(address)
-        usoamic.getEthBalance(address)?.let {
-            return it
-        }
-        throw ContractNullPointerException()
+        return usoamic.getEthBalance(address)
     }
 
     fun getSupply(): BigInteger {
