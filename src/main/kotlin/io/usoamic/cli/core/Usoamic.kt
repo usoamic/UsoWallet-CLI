@@ -7,7 +7,6 @@ import io.usoamic.cli.util.getOrZero
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.util.Coin
 import org.web3j.utils.Convert
-import java.lang.NullPointerException
 import java.math.BigInteger
 import javax.inject.Inject
 

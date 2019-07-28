@@ -1,11 +1,12 @@
 package io.usoamic.cli.di
 
+import dagger.Module
 import dagger.Provides
 import io.usoamic.cli.core.*
 import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.other.Config
 import javax.inject.Singleton
 
+@Module
 class CoreModule {
     @Provides
     @Singleton
@@ -47,5 +48,11 @@ class CoreModule {
     @Singleton
     fun provideTransactionExplorer(usoamic: Usoamic): TransactionExplorer {
         return TransactionExplorer(usoamic)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUsoamic(usoamic: Usoamic): io.usoamic.cli.core.Usoamic {
+        return Usoamic(usoamic)
     }
 }
