@@ -17,6 +17,7 @@ class Core @Inject constructor(
     private val usoamic: Usoamic
 ) {
     fun getResponse(line: String): String {
+        println("@line: $line")
         val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
         return when (args.getOrEmpty(0)) {
             "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
@@ -27,7 +28,8 @@ class Core @Inject constructor(
             "eth_transfer" -> usoamic.transferEth(args)
             "uso_transfer" -> usoamic.transferUso(args)
             "burn" -> usoamic.burnUso(args)
-            "balance_of" -> usoamic.balanceOf(args).toString()
+            "uso_balance_of" -> usoamic.usoBalanceOf(args).toString()
+            "eth_balance_of" -> usoamic.ethBalanceOf(args).toString()
             "get_supply" -> usoamic.getSupply().toString()
             "get_contract_version" -> usoamic.getVersion()
             "add_idea" -> ideas.addIdea(args)

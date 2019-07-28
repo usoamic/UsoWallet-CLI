@@ -33,11 +33,12 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
     fun transferEth(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val to = args.getOrEmpty(2)
-        val value = args.getOrZero(3)
+        val sValue = args.getOrZero(3)
+        val value = Convert.toWei(sValue, Convert.Unit.ETHER).toBigInteger()
         ValidateUtil.validatePassword(password)
             .validateAddress(to)
-            .validateTransferValue(value)
-        return usoamic.transferEth(password, to, value.toBigInteger())
+            .validateTransferValue(value.toString())
+        return usoamic.transferEth(password, to, value)
     }
 
     fun transferUso(args: List<String>): String {
@@ -58,10 +59,19 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
         return usoamic.burn(password, value.toBigInteger())
     }
 
-    fun balanceOf(args: List<String>): BigInteger {
+    fun usoBalanceOf(args: List<String>): BigInteger {
         val address = args.getOrEmpty(1)
         ValidateUtil.validateAddress(address)
         usoamic.balanceOf(address)?.let {
+            return it
+        }
+        throw ContractNullPointerException()
+    }
+
+    fun ethBalanceOf(args: List<String>): BigInteger {
+        val address = args.getOrEmpty(1)
+        ValidateUtil.validateAddress(address)
+        usoamic.getEthBalance(address)?.let {
             return it
         }
         throw ContractNullPointerException()
