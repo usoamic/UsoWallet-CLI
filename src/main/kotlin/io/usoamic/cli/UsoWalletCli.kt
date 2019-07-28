@@ -205,6 +205,9 @@ class UsoWalletCli {
                     is ObjectNotFoundException -> {
                         println("Not found")
                     }
+                    is ContractNullPointerException -> {
+                        println("Response is null")
+                    }
                     else -> {
                         println("Error: ${e.message}")
                         e.printStackTrace()
