@@ -1,6 +1,9 @@
 package io.usoamic.cli.core
 
 import io.usoamic.cli.exception.ContractNullPointerException
+import io.usoamic.cli.util.Common
+import io.usoamic.cli.util.Common.Companion.convertEthToWei
+import io.usoamic.cli.util.Common.Companion.convertWeiToEth
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
@@ -18,15 +21,13 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
 
     fun getEthBalance(): String {
         val weiBalance = usoamic.getEthBalance()
-        val ethBalance = convertWeiToEth(weiBalance)
-        return ethBalance.toPlainString()
+        return convertWeiToEth(weiBalance).toPlainString()
     }
 
     fun getUsoBalance(): String {
         val satBalance = usoamic.getUsoBalance()
         satBalance?.let {
-            val coinBalance = Coin.fromSat(satBalance).toBigDecimal()
-            return coinBalance.toPlainString()
+            return Coin.fromSat(satBalance).toBigDecimal().toPlainString()
         }
         throw ContractNullPointerException()
     }
@@ -34,32 +35,41 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
     fun transferEth(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val to = args.getOrEmpty(2)
-        val sValue = args.getOrZero(3)
-        val value = Convert.toWei(sValue, Convert.Unit.ETHER).toBigInteger()
+        val value = args.getOrZero(3)
+
         ValidateUtil.validatePassword(password)
-            .validateAddress(to)
-            .validateTransferValue(value.toString())
-        return usoamic.transferEth(password, to, value)
+                    .validateAddress(to)
+                    .validateTransferValue(value)
+
+        val biValue = convertEthToWei(value)
+
+        return usoamic.transferEth(password, to, biValue)
     }
 
     fun transferUso(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val to = args.getOrEmpty(2)
-        val sValue = args.getOrZero(3)
-        val value = Coin.fromCoin(sValue).toSat()
+        val value = args.getOrZero(3)
+
         ValidateUtil.validatePassword(password)
-            .validateAddress(to)
-            .validateTransferValue(value.toString())
-        return usoamic.transferUso(password, to, value)
+                    .validateAddress(to)
+                    .validateTransferValue(value)
+
+        val biValue = Coin.fromCoin(value).toSat()
+
+        return usoamic.transferUso(password, to, biValue)
     }
 
     fun burnUso(args: List<String>): String {
         val password = args.getOrEmpty(1)
-        val sValue = args.getOrZero(2)
-        val value = Coin.fromCoin(sValue).toSat()
+        val value = args.getOrZero(2)
+
         ValidateUtil.validatePassword(password)
-            .validateTransferValue(value.toString())
-        return usoamic.burn(password, value)
+                    .validateTransferValue(value)
+
+        val biValue = Coin.fromCoin(value).toSat()
+
+        return usoamic.burn(password, biValue)
     }
 
     fun usoBalanceOf(args: List<String>): BigDecimal {
@@ -90,9 +100,5 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
             return it
         }
         throw ContractNullPointerException()
-    }
-
-    private fun convertWeiToEth(wei: BigInteger): BigDecimal {
-        return Convert.fromWei(wei.toBigDecimal(), Convert.Unit.ETHER)
     }
 }
