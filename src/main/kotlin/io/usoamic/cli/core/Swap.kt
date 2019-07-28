@@ -8,10 +8,7 @@ import io.usoamic.usoamickotlin.core.Usoamic
 import java.math.BigInteger
 import javax.inject.Inject
 
-class Swap {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Swap @Inject constructor(private val usoamic: Usoamic) {
     fun withdrawEth(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val value = args.getOrEmpty(2)

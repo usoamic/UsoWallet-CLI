@@ -10,10 +10,7 @@ import io.usoamic.usoamickotlin.model.Vote
 import java.math.BigInteger
 import javax.inject.Inject
 
-class Ideas {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Ideas @Inject constructor(private val usoamic: Usoamic) {
     fun addIdea(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val description = args.getOrEmpty(2)

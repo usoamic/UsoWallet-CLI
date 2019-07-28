@@ -9,43 +9,43 @@ import javax.inject.Singleton
 class CoreModule {
     @Provides
     @Singleton
-    fun provideAccountManager(): AccountManager {
-        return AccountManager()
+    fun provideAccountManager(usoamic: Usoamic): AccountManager {
+        return AccountManager(usoamic)
     }
 
     @Provides
     @Singleton
-    fun provideIdeas(): Ideas {
-        return Ideas()
+    fun provideIdeas(usoamic: Usoamic): Ideas {
+        return Ideas(usoamic)
     }
 
     @Provides
     @Singleton
-    fun provideNotes(): Notes {
-        return Notes()
+    fun provideNotes(usoamic: Usoamic): Notes {
+        return Notes(usoamic)
     }
 
     @Provides
     @Singleton
-    fun provideOwner(): Owner {
-        return Owner()
+    fun provideOwner(usoamic: Usoamic): Owner {
+        return Owner(usoamic)
     }
 
     @Provides
     @Singleton
-    fun providePurchases(): Purchases {
-        return Purchases()
+    fun providePurchases(usoamic: Usoamic): Purchases {
+        return Purchases(usoamic)
     }
 
     @Provides
     @Singleton
-    fun provideSwap(): Swap {
-        return Swap()
+    fun provideSwap(usoamic: Usoamic): Swap {
+        return Swap(usoamic)
     }
 
     @Provides
     @Singleton
-    fun provideTransactionExplorer(): TransactionExplorer {
-        return TransactionExplorer()
+    fun provideTransactionExplorer(usoamic: Usoamic): TransactionExplorer {
+        return TransactionExplorer(usoamic)
     }
 }

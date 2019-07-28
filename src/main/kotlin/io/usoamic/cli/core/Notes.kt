@@ -9,10 +9,7 @@ import io.usoamic.usoamickotlin.model.Note
 import java.math.BigInteger
 import javax.inject.Inject
 
-class Notes {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Notes @Inject constructor(private val usoamic: Usoamic) {
     fun addPublicNote(args: List<String>): String = addNote( NoteVisibility.PUBLIC, args)
 
     fun addUnlistedNote(args: List<String>): String = addNote(NoteVisibility.UNLISTED, args)

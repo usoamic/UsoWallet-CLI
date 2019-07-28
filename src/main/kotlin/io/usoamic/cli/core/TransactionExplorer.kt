@@ -8,10 +8,7 @@ import io.usoamic.usoamickotlin.model.Transaction
 import java.math.BigInteger
 import javax.inject.Inject
 
-class TransactionExplorer {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class TransactionExplorer @Inject constructor(private val usoamic: Usoamic) {
     fun getTransaction(args: List<String>): Transaction {
         val txId = args.getOrEmpty(1)
         ValidateUtil.validateId(txId)

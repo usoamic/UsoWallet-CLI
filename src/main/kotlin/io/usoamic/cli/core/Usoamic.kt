@@ -11,10 +11,7 @@ import java.lang.NullPointerException
 import java.math.BigInteger
 import javax.inject.Inject
 
-class Usoamic {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Usoamic @Inject constructor(private val usoamic: Usoamic) {
     fun getAddress(): String {
         return usoamic.address
     }

@@ -5,10 +5,7 @@ import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.usoamickotlin.core.Usoamic
 import javax.inject.Inject
 
-class AccountManager {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class AccountManager @Inject constructor(private val usoamic: Usoamic) {
     fun importMnemonicPhrase(args: List<String>): String {
         val mnemonicPhrase = args.getOrEmpty(1)
         val password = args.getOrEmpty(2)

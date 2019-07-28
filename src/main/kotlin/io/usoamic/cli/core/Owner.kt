@@ -5,10 +5,7 @@ import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.usoamickotlin.core.Usoamic
 import javax.inject.Inject
 
-class Owner {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Owner @Inject constructor(private val usoamic: Usoamic) {
     fun setFrozen(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val frozen = args.getOrEmpty(2)

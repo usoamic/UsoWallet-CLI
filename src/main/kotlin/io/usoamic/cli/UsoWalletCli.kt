@@ -40,10 +40,6 @@ class UsoWalletCli {
 
     init {
         App.component.inject(this)
-
-
-        println("Address: ${usoamic.getAddress()}")
-
         val input = Scanner(System.`in`)
         print("> ")
         while (input.hasNextLine()) {

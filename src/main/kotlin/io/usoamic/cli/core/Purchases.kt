@@ -8,10 +8,7 @@ import io.usoamic.usoamickotlin.model.Purchase
 import java.math.BigInteger
 import javax.inject.Inject
 
-class Purchases {
-    @Inject
-    lateinit var usoamic: Usoamic
-
+class Purchases @Inject constructor(private val usoamic: Usoamic) {
     fun makePurchase(args: List<String>): String {
         val password = args.getOrEmpty(1)
         val appId = args.getOrEmpty(2)
