@@ -1,17 +1,13 @@
 package io.usoamic.cli
 
 import io.usoamic.cli.core.*
+import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.exception.ObjectNotFoundException
-import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
-import io.usoamic.cli.util.getOrZero
-import io.usoamic.cli.util.printIfExist
+import io.usoamic.cli.util.toStringIfExist
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
-import io.usoamic.usoamickotlin.util.Coin
-import org.web3j.utils.Convert
-import java.math.BigInteger
 import java.util.*
 import javax.inject.Inject
 
@@ -54,147 +50,9 @@ class UsoWalletCli {
             try {
                 val line = input.nextLine()
                 val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
-                when (args.getOrEmpty(0)) {
-                    //add
-                    "import_mnemonic_phrase" -> {
-                        println(accountManager.importMnemonicPhrase(args))
-                    }
-                    "import_private_key" -> {
-                        println(accountManager.importPrivateKey(args))
-                    }
-                    //common
-                    "get_address" -> {
-                        println(usoamic.getAddress())
-                    }
-                    "get_eth_balance" -> {
-                        println(usoamic.getEthBalance())
-                    }
-                    "get_uso_balance" -> {
-                        println(usoamic.getUsoBalance())
-                    }
-                    "eth_transfer" -> {
-                        println(usoamic.transferEth(args))
-                    }
-                    "uso_transfer" -> {
-                        println(usoamic.transferUso(args))
-                    }
-                    "burn" -> {
-                        println(usoamic.burnUso(args))
-                    }
-                    "balance_of" -> {
-                        println(usoamic.balanceOf(args))
-                    }
-                    "get_supply" -> {
-                        println(usoamic.getSupply())
-                    }
-                    "get_contract_version" -> {
-                        println(usoamic.getVersion())
-                    }
-                    //idea
-                    "add_idea" -> {
-                        println(ideas.addIdea(args))
-                    }
-                    "get_idea" -> {
-                        ideas.getIdea(args).printIfExist()
-                    }
-                    "get_idea_by_author" -> {
-                        ideas.getIdeasByAuthor(args).printIfExist()
-                    }
-                    //Vote for idea
-                    "support_idea" -> {
-                        println(ideas.supportIdea(args))
-                    }
-                    "abstain_idea" -> {
-                        println(ideas.abstainIdea(args))
-                    }
-                    "against_idea" -> {
-                        println(ideas.againstIdea(args))
-                    }
-                    "get_vote" -> {
-                        ideas.getVote(args).printIfExist()
-                    }
-                    "get_vote_by_voter" -> {
-                        ideas.getVoteByVoter(args).printIfExist()
-                    }
-                    "get_number_of_ideas_by_author" -> {
-                        println(ideas.getNumberOfIdeasByAuthor(args))
-                    }
-                    "get_number_of_ideas" -> {
-                        println(ideas.getNumberOfIdeas())
-                    }
-                    "get_number_of_votes_by_voter" -> {
-                        println(ideas.getNumberOfVotesByVoter(args))
-                    }
-                    //Notes
-                    "add_public_note" -> {
-                        println(notes.addPublicNote(args))
-                    }
-                    "add_unlisted_note" -> {
-                        println(notes.addUnlistedNote(args))
-                    }
-                    "get_number_of_public_notes" -> {
-                        println(notes.getNumberOfPublicNotes())
-                    }
-                    "get_number_of_notes_by_author" -> {
-                        println(notes.getNumberOfNotesByAuthor(args))
-                    }
-                    "get_note_by_author" -> {
-                        notes.getNoteByAuthor(args).printIfExist()
-                    }
-                    "get_note" -> {
-                        notes.getNote(args).printIfExist()
-                    }
-                    //Owner
-                    "set_frozen" -> {
-                        println(owner.setFrozen(args))
-                    }
-                    "set_owner" -> {
-                        println(owner.setOwner(args))
-                    }
-                    //Purchases
-                    "make_purchase" -> {
-                        println(purchases.makePurchase(args))
-                    }
-                    "get_purchase_by_address" -> {
-                        purchases.getPurchaseByAddress(args).printIfExist()
-                    }
-                    "get_number_of_purchase_by_address" -> {
-                        println(purchases.getNumberOfPurchasesByAddress(args))
-                    }
-                    //Swap
-                    "withdraw_eth" -> {
-                        println(swap.withdrawEth(args))
-                    }
-                    "burn_swap" -> {
-                        println(swap.burnSwap(args))
-                    }
-                    "set_swap_rate" -> {
-                        println(swap.setSwapRate(args))
-                    }
-                    "set_swappable" -> {
-                        println(swap.setSwappable(args))
-                    }
-                    "get_swap_balance" -> {
-                        println(swap.usoamic)
-                    }
-                    "get_swap_rate" -> {
-                        println(swap.getSwapRate())
-                    }
-                    "get_swappable" -> {
-                        println(swap.getSwappable())
-                    }
-                    //transactions
-                    "get_transaction" -> {
-                        transactionExplorer.getTransaction(args).printIfExist()
-                    }
-                    "get_number_of_transactions" -> {
-                        println(transactionExplorer.getNumberOfTransactions())
-                    }
-                    "get_number_of_transactions_by_address" -> {
-                        println(transactionExplorer.getNumberOfTransactionsByAddress(args))
-                    }
-                }
-            } catch (e: Exception) {
+                println(getResponse(args))
+            }
+            catch (e: Exception) {
                 when (e) {
                     is InvalidMnemonicPhraseException -> {
                         println("Invalid Mnemonic Phrase")
@@ -215,6 +73,55 @@ class UsoWalletCli {
                 }
             }
             print("> ")
+        }
+    }
+
+    private fun getResponse(args: List<String>): String {
+        return when (args.getOrEmpty(0)) {
+            "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
+            "import_private_key" -> accountManager.importPrivateKey(args)
+            "get_address" -> usoamic.getAddress()
+            "get_eth_balance" -> usoamic.getEthBalance()
+            "get_uso_balance" -> usoamic.getUsoBalance()
+            "eth_transfer" -> usoamic.transferEth(args)
+            "uso_transfer" -> usoamic.transferUso(args)
+            "burn" -> usoamic.burnUso(args)
+            "balance_of" -> usoamic.balanceOf(args).toString()
+            "get_supply" -> usoamic.getSupply().toString()
+            "get_contract_version" -> usoamic.getVersion()
+            "add_idea" -> ideas.addIdea(args)
+            "get_idea" -> ideas.getIdea(args).toStringIfExist()
+            "get_idea_by_author" -> ideas.getIdeasByAuthor(args).toStringIfExist()
+            "support_idea" -> ideas.supportIdea(args)
+            "abstain_idea" -> ideas.abstainIdea(args)
+            "against_idea" -> ideas.againstIdea(args)
+            "get_vote" -> ideas.getVote(args).toStringIfExist()
+            "get_vote_by_voter" -> ideas.getVoteByVoter(args).toStringIfExist()
+            "get_number_of_ideas_by_author" -> ideas.getNumberOfIdeasByAuthor(args).toString()
+            "get_number_of_ideas" -> ideas.getNumberOfIdeas().toString()
+            "get_number_of_votes_by_voter" -> ideas.getNumberOfVotesByVoter(args).toString()
+            "add_public_note" -> notes.addPublicNote(args)
+            "add_unlisted_note" -> notes.addUnlistedNote(args)
+            "get_number_of_public_notes" -> notes.getNumberOfPublicNotes().toString()
+            "get_number_of_notes_by_author" -> notes.getNumberOfNotesByAuthor(args).toString()
+            "get_note_by_author" -> notes.getNoteByAuthor(args).toStringIfExist()
+            "get_note" -> notes.getNote(args).toStringIfExist()
+            "set_frozen" -> owner.setFrozen(args)
+            "set_owner" -> owner.setOwner(args)
+            "make_purchase" -> purchases.makePurchase(args)
+            "get_purchase_by_address" -> purchases.getPurchaseByAddress(args).toStringIfExist()
+            "get_number_of_purchase_by_address" -> purchases.getNumberOfPurchasesByAddress(args).toString()
+            "withdraw_eth" -> swap.withdrawEth(args)
+            "burn_swap" -> swap.burnSwap(args)
+            "set_swap_rate" -> swap.setSwapRate(args)
+            "set_swappable" -> swap.setSwappable(args)
+            "get_swap_balance" -> swap.getSwapBalance().toString()
+            "get_swap_rate" -> swap.getSwapRate().toString()
+            "get_swappable" -> swap.getSwappable().toString()
+            "get_transaction" -> transactionExplorer.getTransaction(args).toStringIfExist()
+            "get_number_of_transactions" -> transactionExplorer.getNumberOfTransactions().toString()
+            "get_number_of_transactions_by_address" -> transactionExplorer.getNumberOfTransactionsByAddress(args).toString()
+            else -> throw CommandNotFoundException()
         }
     }
 }
