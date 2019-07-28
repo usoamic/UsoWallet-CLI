@@ -2,6 +2,7 @@ package io.usoamic.cli
 
 import io.usoamic.cli.core.AccountManager
 import io.usoamic.cli.core.Ideas
+import io.usoamic.cli.core.Notes
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
@@ -22,6 +23,8 @@ class UsoWalletCli {
     lateinit var accountManager: AccountManager
     @Inject
     lateinit var ideas: Ideas
+    @Inject
+    lateinit var notes: Notes
     @Inject
     lateinit var usoamic: Usoamic
 
@@ -111,39 +114,22 @@ class UsoWalletCli {
                     }
                     //Notes
                     "add_public_note" -> {
-                        val password = args.getOrEmpty(1)
-                        val content = args.getOrEmpty(2)
-                        ValidateUtil.validatePassword(password)
-                            .validateDescription(content)
-                        val txHash = usoamic.addIdea(password, content)
-                        println(txHash)
+                        println(notes.addPublicNote(args))
                     }
                     "add_unlisted_note" -> {
-                        //TODO: Fill code block
+                        println(notes.addUnlistedNote(args))
                     }
                     "get_number_of_public_notes" -> {
-                        val numberOfNotes = usoamic.getNumberOfPublicNotes()
-                        println(numberOfNotes)
+                        println(notes.getNumberOfPublicNotes())
                     }
                     "get_number_of_notes_by_author" -> {
-                        val author = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(author)
-                        val numberOfNotes = usoamic.getNumberOfNotesByAuthor(author)
-                        println(numberOfNotes)
+                        println(notes.getNumberOfNotesByAuthor(args))
                     }
                     "get_note_by_author" -> {
-                        val author = args.getOrEmpty(1)
-                        val noteId = args.getOrEmpty(2)
-                        ValidateUtil.validateAddress(author)
-                            .validateId(noteId)
-                        val note = usoamic.getNoteByAuthor(author, noteId.toBigInteger())
-                        note.printIfExist()
+                        notes.getNoteByAuthor(args).printIfExist()
                     }
                     "get_note" -> {
-                        val noteRefId = args.getOrEmpty(2)
-                        ValidateUtil.validateId(noteRefId)
-                        val note = usoamic.getNote(noteRefId.toBigInteger())
-                        note.printIfExist()
+                        notes.getNote(args).printIfExist()
                     }
                     //Owner
                     "set_frozen" -> {
