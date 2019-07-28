@@ -40,7 +40,7 @@ class ValidateUtil {
 
         fun validateTransferValue(value: String) = apply {
             val intValue = value.toBigIntegerOrNull() ?: throw ValidateUtilException("Value Required")
-            if(intValue > BigInteger.ZERO) {
+            if(intValue <= BigInteger.ZERO) {
                 throw ValidateUtilException("Invalid Value")
             }
         }
