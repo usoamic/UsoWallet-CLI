@@ -7,6 +7,7 @@ import io.usoamic.cli.util.getOrZero
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.util.Coin
 import org.web3j.utils.Convert
+import java.math.BigDecimal
 import java.math.BigInteger
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
 
     fun getEthBalance(): String {
         val weiBalance = usoamic.getEthBalance()
-        val ethBalance = Convert.fromWei(weiBalance.toBigDecimal(), Convert.Unit.ETHER)
+        val ethBalance = convertWeiToEth(weiBalance)
         return ethBalance.toPlainString()
     }
 
@@ -59,24 +60,25 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
         return usoamic.burn(password, value.toBigInteger())
     }
 
-    fun usoBalanceOf(args: List<String>): BigInteger {
+    fun usoBalanceOf(args: List<String>): BigDecimal {
         val address = args.getOrEmpty(1)
         ValidateUtil.validateAddress(address)
         usoamic.balanceOf(address)?.let {
-            return it
+            return Coin.fromSat(it).toBigDecimal()
         }
         throw ContractNullPointerException()
     }
 
-    fun ethBalanceOf(args: List<String>): BigInteger {
+    fun ethBalanceOf(args: List<String>): BigDecimal {
         val address = args.getOrEmpty(1)
         ValidateUtil.validateAddress(address)
-        return usoamic.getEthBalance(address)
+        val weiBalance = usoamic.getEthBalance(address)
+        return convertWeiToEth(weiBalance)
     }
 
-    fun getSupply(): BigInteger {
+    fun getSupply(): BigDecimal {
         usoamic.getSupply()?.let {
-            return it
+            return Coin.fromSat(it).toBigDecimal()
         }
         throw ContractNullPointerException()
     }
@@ -86,5 +88,9 @@ class Usoamic @Inject constructor(private val usoamic: Usoamic) {
             return it
         }
         throw ContractNullPointerException()
+    }
+
+    private fun convertWeiToEth(wei: BigInteger): BigDecimal {
+        return Convert.fromWei(wei.toBigDecimal(), Convert.Unit.ETHER)
     }
 }
