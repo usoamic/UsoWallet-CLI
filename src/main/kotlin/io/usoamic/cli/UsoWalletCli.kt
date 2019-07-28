@@ -29,8 +29,7 @@ class UsoWalletCli {
         while (input.hasNextLine()) {
             try {
                 val line = input.nextLine()
-                val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
-                println(getResponse(args))
+                println(getResponse(line))
             }
             catch (e: Exception) {
                 when (e) {
@@ -59,7 +58,8 @@ class UsoWalletCli {
         }
     }
 
-    private fun getResponse(args: List<String>): String {
+    fun getResponse(line: String): String {
+        val args = line.split(Regex(" (?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*\$)"))
         return when (args.getOrEmpty(0)) {
             "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
             "import_private_key" -> accountManager.importPrivateKey(args)
