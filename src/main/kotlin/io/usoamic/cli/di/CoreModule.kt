@@ -1,10 +1,7 @@
 package io.usoamic.cli.di
 
 import dagger.Provides
-import io.usoamic.cli.core.AccountManager
-import io.usoamic.cli.core.Ideas
-import io.usoamic.cli.core.Notes
-import io.usoamic.cli.core.Owner
+import io.usoamic.cli.core.*
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.other.Config
 import javax.inject.Singleton
@@ -32,5 +29,11 @@ class CoreModule {
     @Singleton
     fun provideOwner(): Owner {
         return Owner()
+    }
+
+    @Provides
+    @Singleton
+    fun providePurchases(): Purchases {
+        return Purchases()
     }
 }

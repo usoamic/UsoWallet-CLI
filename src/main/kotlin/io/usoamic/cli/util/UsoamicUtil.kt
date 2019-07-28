@@ -1,10 +1,7 @@
 package io.usoamic.cli.util
 
 import io.usoamic.cli.exception.ObjectNotFoundException
-import io.usoamic.usoamickotlin.model.Idea
-import io.usoamic.usoamickotlin.model.Note
-import io.usoamic.usoamickotlin.model.Transaction
-import io.usoamic.usoamickotlin.model.Vote
+import io.usoamic.usoamickotlin.model.*
 
 fun Idea.printIfExist() {
     if (isExist) {
@@ -28,6 +25,13 @@ fun Vote.printIfExist() {
 }
 
 fun Note.printIfExist() {
+    if (isExist) {
+        println(this)
+    }
+    else throw ObjectNotFoundException()
+}
+
+fun Purchase.printIfExist() {
     if (isExist) {
         println(this)
     }

@@ -25,6 +25,8 @@ class UsoWalletCli {
     @Inject
     lateinit var owner: Owner
     @Inject
+    lateinit var purchases: Purchases
+    @Inject
     lateinit var usoamic: Usoamic
 
 
@@ -139,33 +141,13 @@ class UsoWalletCli {
                     }
                     //Purchases
                     "make_purchase" -> {
-                        val password = args.getOrEmpty(1)
-                        val appId = args.getOrEmpty(2)
-                        val purchaseId = args.getOrEmpty(3)
-                        val cost = args.getOrEmpty(4)
-                        ValidateUtil.validatePassword(password)
-                            .validateAppId(appId)
-                            .validatePurchaseId(purchaseId)
-                            .validateTransferValue(cost)
-
-                        val txHash = usoamic.makePurchase(password, appId, purchaseId, cost.toBigInteger())
-                        println(txHash)
+                        println(purchases.makePurchase(args))
                     }
                     "get_purchase_by_address" -> {
-                        val address = args.getOrEmpty(1)
-                        val id = args.getOrEmpty(2)
-                        ValidateUtil.validateAddress(address)
-                            .validateId(id)
-
-                        val purchase = usoamic.getPurchaseByAddress(address, id.toBigInteger())
-                        println(purchase)
+                        purchases.getPurchaseByAddress(args).printIfExist()
                     }
                     "get_number_of_purchase_by_address" -> {
-                        val address = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(address)
-
-                        val numberOfPurchases = usoamic.getNumberOfPurchasesByAddress(address)
-                        println(numberOfPurchases)
+                        println(purchases.getNumberOfPurchasesByAddress(args))
                     }
                     //Swap
                     "withdraw_eth" -> {
