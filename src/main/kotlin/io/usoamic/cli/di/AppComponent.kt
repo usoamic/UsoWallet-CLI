@@ -14,6 +14,7 @@ interface AppComponent {
     fun inject(clazz: Owner)
     fun inject(clazz: Purchases)
     fun inject(clazz: Swap)
+    fun inject(clazz: TransactionExplorer)
     fun inject(clazz: Usoamic)
     fun inject(clazz: AccountManager)
 }

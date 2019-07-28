@@ -1,6 +1,7 @@
 package io.usoamic.cli
 
 import io.usoamic.cli.core.*
+import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
@@ -33,6 +34,9 @@ class UsoWalletCli {
 
     @Inject
     lateinit var swap: Swap
+
+    @Inject
+    lateinit var transactionExplorer: TransactionExplorer
 
     @Inject
     lateinit var usoamic: Usoamic
@@ -181,20 +185,13 @@ class UsoWalletCli {
                     }
                     //transactions
                     "get_transaction" -> {
-                        val txId = args.getOrEmpty(1)
-                        ValidateUtil.validateId(txId)
-                        val transaction = usoamic.getTransaction(BigInteger.ONE)
-                        transaction.printIfExist()
+                        transactionExplorer.getTransaction(args).printIfExist()
                     }
                     "get_number_of_transactions" -> {
-                        val numberOfTransactions = usoamic.getNumberOfTransactions()
-                        println(numberOfTransactions)
+                        println(transactionExplorer.getNumberOfTransactions())
                     }
                     "get_number_of_transactions_by_address" -> {
-                        val address = args.getOrEmpty(1)
-                        ValidateUtil.validateAddress(address)
-                        val numberOfTransactions = usoamic.getNumberOfTransactionsByAddress(address)
-                        println(numberOfTransactions)
+                        println(transactionExplorer.getNumberOfTransactionsByAddress(args))
                     }
                 }
             } catch (e: Exception) {

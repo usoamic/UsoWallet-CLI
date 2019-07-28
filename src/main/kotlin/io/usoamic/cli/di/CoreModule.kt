@@ -42,4 +42,10 @@ class CoreModule {
     fun provideSwap(): Swap {
         return Swap()
     }
+
+    @Provides
+    @Singleton
+    fun provideTransactionExplorer(): TransactionExplorer {
+        return TransactionExplorer()
+    }
 }
