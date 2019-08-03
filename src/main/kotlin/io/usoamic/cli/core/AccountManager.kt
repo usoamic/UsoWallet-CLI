@@ -11,18 +11,20 @@ import javax.inject.Inject
 
 class AccountManager @Inject constructor(private val usoamic: Usoamic) {
     fun importMnemonicPhrase(args: List<String>): String {
-        val mnemonicPhrase = args.getOrEmpty(1)
-        val password = args.getOrEmpty(2)
+        val password = args.getOrEmpty(1)
+        val mnemonicPhrase = args.getOrEmpty(2)
 
         ValidateUtil.validateMnemonicPhrase(mnemonicPhrase)
             .validatePassword(password)
+
+        println("@phrase: $mnemonicPhrase")
 
         return usoamic.importMnemonic(password, mnemonicPhrase)
     }
 
     fun importPrivateKey(args: List<String>): String {
-        val privateKey = args.getOrEmpty(1)
-        val password = args.getOrEmpty(2)
+        val password = args.getOrEmpty(1)
+        val privateKey = args.getOrEmpty(2)
 
         ValidateUtil.validatePrivateKey(privateKey)
             .validatePassword(password)
