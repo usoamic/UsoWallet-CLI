@@ -1,7 +1,6 @@
 package io.usoamic.cli.util
 
 import io.usoamic.cli.exception.ValidateUtilException
-import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
 import org.web3j.crypto.MnemonicUtils
 import org.web3j.crypto.WalletUtils
 import java.math.BigInteger
