@@ -2,6 +2,7 @@ package io.usoamic.cli.util
 
 import io.usoamic.cli.exception.ValidateUtilException
 import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
+import org.web3j.crypto.MnemonicUtils
 import org.web3j.crypto.WalletUtils
 import java.math.BigInteger
 
@@ -25,10 +26,16 @@ class ValidateUtil {
 
         fun validatePrivateKey(privateKey: String) = apply {
             validateThatNotEmpty(privateKey, "Private Key Required")
+            if(!WalletUtils.isValidPrivateKey(privateKey)) {
+                throw ValidateUtilException("Invalid Private Key")
+            }
         }
 
         fun validateMnemonicPhrase(mnemonicPhrase: String) = apply {
             validateThatNotEmpty(mnemonicPhrase, "Mnemonic Phrase Required")
+            if(!MnemonicUtils.validateMnemonic(mnemonicPhrase)) {
+                throw ValidateUtilException("Invalid Mnemonic Phrase")
+            }
         }
 
         fun validateAddress(address: String) = apply {
