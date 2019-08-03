@@ -25,8 +25,6 @@ class TransactionExplorerTest {
         val txHash = core.getResponse("uso_transfer ${TestConfig.PASSWORD} $address ${coin.toBigDecimal()}")
         usoamic.waitTransactionReceipt(txHash) {
             val result = core.getResponse("get_transaction $lastTxNumber")
-            println("@result: $result")
-            println("@lastTxNumber: $lastTxNumber")
             assert(result.contains("isExist=true"))
             assert(result.contains("txId=$lastTxNumber"))
             assert(result.contains("from=${TestConfig.DEFAULT_ADDRESS}"))

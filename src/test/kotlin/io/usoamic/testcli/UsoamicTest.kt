@@ -41,7 +41,7 @@ class UsoamicTest {
         val value = BigDecimal("0.005")
 
         assert(aliceBalance.toBigDecimal() > value) {
-            println("Need more tokens: $value")
+            println("Need more ethers: $value")
         }
 
         val bobAddress = Utils.getNewAddress()
@@ -71,7 +71,6 @@ class UsoamicTest {
             val newAliceBalance = core.getResponse("get_uso_balance")
             val newBobBalance = core.getResponse("uso_balance_of $bobAddress")
             assert(newAliceBalance.toBigDecimal() < aliceBalance.toBigDecimal())
-            println("@newBobBalance: $newBobBalance")
             assert(newBobBalance.toBigDecimal().compareTo(value) == 0)
         }
     }

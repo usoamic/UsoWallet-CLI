@@ -28,7 +28,6 @@ class NotesTest {
         val txHash = core.getResponse("add_public_note ${TestConfig.PASSWORD} '$noteContent'")
         usoamic.waitTransactionReceipt(txHash) {
             val note = core.getResponse("get_note $numberOfPublicNotes")
-            println(note)
             assert(note.contains("isExist=true"))
             assert(note.contains("content=$noteContent"))
             assert(note.contains("visibility=${NoteVisibility.PUBLIC}"))
