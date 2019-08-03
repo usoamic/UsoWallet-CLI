@@ -38,7 +38,7 @@ class NotesTest {
     fun addUnlistedNoteTest() {
         val noteContent = "My unlisted note #${Random.nextInt()}"
         val numberOfNotes = core.getResponse("get_number_of_notes_by_author ${TestConfig.DEFAULT_ADDRESS}")
-        val txHash = core.getResponse("add_unlisted_note ${TestConfig.PASSWORD} $noteContent")
+        val txHash = core.getResponse("add_unlisted_note ${TestConfig.PASSWORD} '$noteContent'")
         usoamic.waitTransactionReceipt(txHash) {
             val note = core.getResponse("get_note_by_author ${TestConfig.DEFAULT_ADDRESS} $numberOfNotes")
             assert(note.contains("isExist=true"))
