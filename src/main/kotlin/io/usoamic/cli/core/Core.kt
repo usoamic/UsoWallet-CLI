@@ -64,7 +64,7 @@ class Core @Inject constructor(
             "set_swap_rate" -> swap.setSwapRate(args)
             "set_swappable" -> swap.setSwappable(args)
             "get_swap_balance" -> swap.getSwapBalance().toString()
-            "get_swap_rate" -> swap.getSwapRate().toString()
+            "get_swap_rate" -> swap.getSwapRate().toPlainString()
             "get_swappable" -> swap.getSwappable().toString()
             "get_transaction" -> transactionExplorer.getTransaction(args).toStringIfExist()
             "get_number_of_transactions" -> transactionExplorer.getNumberOfTransactions().toString()
