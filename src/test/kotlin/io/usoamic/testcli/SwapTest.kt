@@ -4,6 +4,7 @@ import io.usoamic.cli.core.Core
 import io.usoamic.cli.util.Common
 import io.usoamic.testcli.other.TestConfig
 import io.usoamic.usoamickotlin.core.Usoamic
+import io.usoamic.usoamickotlin.util.Coin
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.web3j.exceptions.MessageDecodingException
@@ -31,9 +32,20 @@ class SwapTest {
     fun burnSwapTest() {
         val swappable = usoamic.getSwappable()
         if(swappable!!) {
-            val value = BigDecimal(500)
+            val value = Coin.ONE_HUNDRED.toBigDecimal()
             val usoBalance = core.getResponse("uso_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
             val ethBalance = core.getResponse("eth_balance_of ${TestConfig.DEFAULT_ADDRESS}").toBigDecimal()
+            val contractBalance = core.getResponse("eth_balance_of ${TestConfig.CONTRACT_ADDRESS}").toBigDecimal()
+            val swapRatePerSat = core.getResponse("get_swap_rate").toBigDecimal()
+
+            val ethNumber = swapRatePerSat.multiply(Coin.fromCoin(value).toSat().toBigDecimal())
+
+            assert(contractBalance >= ethNumber) {
+                println("Need more ethers on contract address: ${TestConfig.CONTRACT_ADDRESS}")
+            }
+            assert(usoBalance > value) {
+                println("Need more USO")
+            }
 
             val txHash = core.getResponse("burn_swap ${TestConfig.PASSWORD} $value")
 
