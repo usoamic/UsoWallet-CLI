@@ -3,6 +3,7 @@ package io.usoamic.cli.util
 import io.usoamic.cli.exception.ValidateUtilException
 import org.web3j.crypto.MnemonicUtils
 import org.web3j.crypto.WalletUtils
+import java.math.BigDecimal
 import java.math.BigInteger
 
 class ValidateUtil {
@@ -45,8 +46,8 @@ class ValidateUtil {
         }
 
         fun validateTransferValue(value: String) = apply {
-            val intValue = value.toBigIntegerOrNull() ?: throw ValidateUtilException("Value Required")
-            if(intValue <= BigInteger.ZERO) {
+            val decimalVal = value.toBigDecimalOrNull() ?: throw ValidateUtilException("Value Required")
+            if(decimalVal <= BigDecimal.ZERO) {
                 throw ValidateUtilException("Invalid Value")
             }
         }
