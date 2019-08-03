@@ -24,6 +24,8 @@ class Core @Inject constructor(
         return when (args.getOrEmpty(0)) {
             "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
             "import_private_key" -> accountManager.importPrivateKey(args)
+            "create_mnemonic_phrase" -> accountManager.createMnemonicPhrase()
+            "create_private_key" -> accountManager.createPrivateKey()
             "get_address" -> usoamic.getAddress()
             "get_eth_balance" -> usoamic.getEthBalance()
             "get_uso_balance" -> usoamic.getUsoBalance()
