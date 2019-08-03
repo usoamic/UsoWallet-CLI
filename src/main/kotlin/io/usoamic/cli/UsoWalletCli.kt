@@ -40,7 +40,6 @@ class UsoWalletCli {
                     }
                     else -> {
                         println("Error: ${e.message}")
-                        e.printStackTrace()
                     }
                 }
             }
