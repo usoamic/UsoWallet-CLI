@@ -1,8 +1,7 @@
 package io.usoamic.testcli
 
-import io.usoamic.cli.Core
+import io.usoamic.cli.core.Core
 import io.usoamic.testcli.other.TestConfig
-import io.usoamic.testcli.util.Utils
 import io.usoamic.testcli.util.Utils.Companion.getNewAddress
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

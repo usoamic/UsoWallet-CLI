@@ -1,5 +1,6 @@
 package io.usoamic.cli
 
+import io.usoamic.cli.core.Core
 import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.exception.ObjectNotFoundException

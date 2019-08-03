@@ -1,12 +1,11 @@
 package io.usoamic.testcli
 
-import io.usoamic.cli.Core
+import io.usoamic.cli.core.Core
 import io.usoamic.testcli.other.TestConfig
 import io.usoamic.testcli.util.Utils
 import io.usoamic.usoamickotlin.core.Usoamic
 import io.usoamic.usoamickotlin.util.Coin
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
 import java.math.BigInteger
 import javax.inject.Inject
 

@@ -1,6 +1,5 @@
-package io.usoamic.cli
+package io.usoamic.cli.core
 
-import io.usoamic.cli.core.*
 import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.removeQuotes

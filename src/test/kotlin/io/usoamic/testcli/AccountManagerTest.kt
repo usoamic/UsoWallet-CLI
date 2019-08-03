@@ -1,6 +1,6 @@
 package io.usoamic.testcli
 
-import io.usoamic.cli.Core
+import io.usoamic.cli.core.Core
 import javax.inject.Inject
 
 class AccountManagerTest {
@@ -10,4 +10,6 @@ class AccountManagerTest {
     init {
         BaseUnitTest.componentTest.inject(this)
     }
+
+
 }

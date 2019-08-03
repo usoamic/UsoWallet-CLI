@@ -1,6 +1,6 @@
 package io.usoamic.testcli
 
-import io.usoamic.cli.Core
+import io.usoamic.cli.core.Core
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.testcli.other.TestConfig
 import io.usoamic.usoamickotlin.core.Usoamic

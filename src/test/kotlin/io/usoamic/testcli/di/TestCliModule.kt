@@ -2,10 +2,9 @@ package io.usoamic.testcli.di
 
 import dagger.Module
 import dagger.Provides
-import io.usoamic.cli.Core
+import io.usoamic.cli.core.Core
 import io.usoamic.cli.core.*
 import io.usoamic.cli.core.Usoamic
-import io.usoamic.usoamickotlin.other.Config
 import javax.inject.Singleton
 
 @Module
@@ -20,6 +19,15 @@ class TestCliModule {
                     swap: Swap,
                     transactionExplorer: TransactionExplorer,
                     usoamic: Usoamic): Core {
-        return Core(accountManager, ideas, notes, owner, purchases, swap, transactionExplorer, usoamic)
+        return Core(
+            accountManager,
+            ideas,
+            notes,
+            owner,
+            purchases,
+            swap,
+            transactionExplorer,
+            usoamic
+        )
     }
 }
