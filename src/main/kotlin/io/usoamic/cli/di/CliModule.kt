@@ -12,6 +12,7 @@ class CliModule {
     @Provides
     @Singleton
     fun provideCore(accountManager: AccountManager,
+                    help: Help,
                     ideas: Ideas,
                     notes: Notes,
                     owner: Owner,
@@ -21,6 +22,7 @@ class CliModule {
                     usoamic: Usoamic): Core {
         return Core(
             accountManager,
+            help,
             ideas,
             notes,
             owner,

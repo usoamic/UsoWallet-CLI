@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class Core @Inject constructor(
     private val accountManager: AccountManager,
+    private val help: Help,
     private val ideas: Ideas,
     private val notes: Notes,
     private val owner: Owner,
@@ -17,11 +18,11 @@ class Core @Inject constructor(
     private val usoamic: Usoamic
 ) {
     fun getResponse(line: String): String {
-        println("@line: $line")
         val args = line.split(Regex(" (?=(?:[^\\\']*\\\'[^\\\']*\\\')*[^\\\']*\$)"))
                                    .map { it.removeQuotes() }
 
         return when (args.getOrEmpty(0)) {
+            "help" -> help.toString()
             "import_mnemonic_phrase" -> accountManager.importMnemonicPhrase(args)
             "import_private_key" -> accountManager.importPrivateKey(args)
             "create_mnemonic_phrase" -> accountManager.createMnemonicPhrase()
