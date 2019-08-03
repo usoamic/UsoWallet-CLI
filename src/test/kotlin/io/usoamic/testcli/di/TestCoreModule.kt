@@ -16,6 +16,12 @@ class TestCoreModule {
 
     @Provides
     @Singleton
+    fun provideHelp(): Help {
+        return Help()
+    }
+
+    @Provides
+    @Singleton
     fun provideIdeas(usoamic: Usoamic): Ideas {
         return Ideas(usoamic)
     }
