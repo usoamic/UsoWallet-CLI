@@ -48,7 +48,7 @@ class Notes @Inject constructor(private val usoamic: Usoamic) {
         val password = args.getOrEmpty(1)
         val content = args.getOrEmpty(2)
         ValidateUtil.validatePassword(password)
-            .validateDescription(content)
+            .validateNoteContent(content)
         return when(noteVisibility) {
             NoteVisibility.PUBLIC -> usoamic.addPublicNote(password, content)
             NoteVisibility.UNLISTED -> usoamic.addUnlistedNote(password, content)
