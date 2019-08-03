@@ -49,7 +49,7 @@ class NotesTest {
     }
 
     @Test
-    fun getNumberOfPublicNotes() {
+    fun getNumberOfPublicNotesTest() {
         val numberOfNotes = core.getResponse("get_number_of_public_notes")
         assert(numberOfNotes.toBigInteger() >= BigInteger.ZERO)
     }
