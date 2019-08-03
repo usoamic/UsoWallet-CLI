@@ -16,9 +16,6 @@ class AccountManager @Inject constructor(private val usoamic: Usoamic) {
 
         ValidateUtil.validateMnemonicPhrase(mnemonicPhrase)
             .validatePassword(password)
-
-        println("@phrase: $mnemonicPhrase")
-
         return usoamic.importMnemonic(password, mnemonicPhrase)
     }
 
@@ -29,7 +26,7 @@ class AccountManager @Inject constructor(private val usoamic: Usoamic) {
         ValidateUtil.validatePrivateKey(privateKey)
             .validatePassword(password)
 
-        return usoamic.importMnemonic(password, privateKey)
+        return usoamic.importPrivateKey(password, privateKey)
     }
 
     fun createPrivateKey(): String {
