@@ -13,7 +13,7 @@ allprojects {
 
 repositories {
     mavenCentral()
-    maven(url = "https://jitpack.io")
+    maven("https://jitpack.io")
 }
 
 dependencies {
