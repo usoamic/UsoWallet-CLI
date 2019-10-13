@@ -7,7 +7,7 @@ plugins {
 }
 
 allprojects {
-    group = "io.usoamic"
+    group = "io.usoamic.cli"
     version = "1.0.1"
 }
 
