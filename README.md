@@ -1,5 +1,5 @@
 # UsoWallet-CLI
-## Commands:
+### Commands:
 * import_mnemonic_phrase <PASSWORD> <MNEMONIC_PHRASE>
 * import_private_key <PASSWORD> <PRIVATE_KEY>
 * create_mnemonic_phrase
