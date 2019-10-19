@@ -2,8 +2,8 @@ package io.usoamic.cli.core
 
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.util.MnemonicUtils
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.util.MnemonicUtils
 import org.web3j.crypto.Credentials
 import org.web3j.crypto.Keys
 import org.web3j.crypto.WalletUtils

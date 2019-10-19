@@ -4,8 +4,8 @@ import io.usoamic.cli.core.Core
 import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.exception.ObjectNotFoundException
-import io.usoamic.usoamickotlin.exception.InvalidMnemonicPhraseException
-import io.usoamic.usoamickotlin.exception.InvalidPrivateKeyException
+import io.usoamic.usoamickt.exception.InvalidMnemonicPhraseException
+import io.usoamic.usoamickt.exception.InvalidPrivateKeyException
 import java.util.*
 import javax.inject.Inject
 

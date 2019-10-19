@@ -3,8 +3,8 @@ package io.usoamic.testcli
 import io.usoamic.cli.core.Core
 import io.usoamic.cli.util.Common
 import io.usoamic.testcli.other.TestConfig
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.util.Coin
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.util.Coin
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.web3j.exceptions.MessageDecodingException

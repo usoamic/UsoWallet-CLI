@@ -3,7 +3,7 @@ package io.usoamic.cli.di
 import dagger.Module
 import dagger.Provides
 import io.usoamic.cli.core.*
-import io.usoamic.usoamickotlin.core.Usoamic
+import io.usoamic.usoamickt.core.Usoamic
 import javax.inject.Singleton
 
 @Module

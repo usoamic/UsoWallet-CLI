@@ -2,7 +2,7 @@ package io.usoamic.cli.core
 
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
-import io.usoamic.usoamickotlin.core.Usoamic
+import io.usoamic.usoamickt.core.Usoamic
 import javax.inject.Inject
 
 class Owner @Inject constructor(private val usoamic: Usoamic) {

@@ -3,7 +3,7 @@ package io.usoamic.testcli
 import io.usoamic.cli.core.Core
 import io.usoamic.testcli.other.TestConfig
 import io.usoamic.testcli.util.Utils
-import io.usoamic.usoamickotlin.core.Usoamic
+import io.usoamic.usoamickt.core.Usoamic
 import org.junit.jupiter.api.Test
 import org.web3j.crypto.WalletUtils
 import java.math.BigDecimal

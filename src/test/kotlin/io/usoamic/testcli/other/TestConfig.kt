@@ -1,6 +1,6 @@
 package io.usoamic.testcli.other
 
-import io.usoamic.usoamickotlin.other.Config
+import io.usoamic.usoamickt.other.Config
 
 class TestConfig {
     companion object {

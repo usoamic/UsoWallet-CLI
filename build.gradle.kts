@@ -8,7 +8,7 @@ plugins {
 
 allprojects {
     group = "io.usoamic.cli"
-    version = "1.0.1"
+    version = "1.0.2"
 }
 
 repositories {
@@ -21,7 +21,7 @@ dependencies {
     compile("com.google.dagger", "dagger", "2.23.2")
     compile("com.google.code.gson", "gson", "2.8.5")
     compile("org.web3j", "core", "4.3.1")
-    compile("com.github.usoamic", "usoamic-kotlin", "v1.0.10")
+    compile("com.github.usoamic", "usoamickt", "v1.0.11")
     kapt("com.google.dagger", "dagger-compiler", "2.23.2")
 
     testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", "1.3.40")

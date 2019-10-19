@@ -3,8 +3,8 @@ package io.usoamic.testcli.di
 import dagger.Module
 import dagger.Provides
 import io.usoamic.testcli.other.TestConfig
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.other.Config
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.other.Config
 import javax.inject.Singleton
 
 @Module

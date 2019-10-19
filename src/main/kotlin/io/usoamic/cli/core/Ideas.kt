@@ -3,10 +3,10 @@ package io.usoamic.cli.core
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.enum.VoteType
-import io.usoamic.usoamickotlin.model.Idea
-import io.usoamic.usoamickotlin.model.Vote
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.enum.VoteType
+import io.usoamic.usoamickt.model.Idea
+import io.usoamic.usoamickt.model.Vote
 import java.math.BigInteger
 import javax.inject.Inject
 

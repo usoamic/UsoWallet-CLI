@@ -3,8 +3,8 @@ package io.usoamic.cli.core
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.model.Transaction
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.model.Transaction
 import java.math.BigInteger
 import javax.inject.Inject
 

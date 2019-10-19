@@ -7,8 +7,8 @@ import io.usoamic.cli.util.Common.Companion.convertWeiToEth
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
-import io.usoamic.usoamickotlin.core.Usoamic
-import io.usoamic.usoamickotlin.util.Coin
+import io.usoamic.usoamickt.core.Usoamic
+import io.usoamic.usoamickt.util.Coin
 import org.web3j.utils.Convert
 import java.math.BigDecimal
 import java.math.BigInteger

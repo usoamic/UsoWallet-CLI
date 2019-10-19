@@ -1,7 +1,7 @@
 package io.usoamic.cli.util
 
 import io.usoamic.cli.exception.ObjectNotFoundException
-import io.usoamic.usoamickotlin.model.*
+import io.usoamic.usoamickt.model.*
 
 fun Idea.toStringIfExist(): String {
     if (isExist) {
