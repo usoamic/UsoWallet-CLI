@@ -1,17 +1,15 @@
 package io.usoamic.cli.core
 
 import io.usoamic.cli.exception.ContractNullPointerException
-import io.usoamic.cli.util.Common
 import io.usoamic.cli.util.Common.Companion.convertEthToWei
+import io.usoamic.cli.util.Common.Companion.convertWeiToEth
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.getOrZero
 import io.usoamic.usoamickt.core.Usoamic
 import io.usoamic.usoamickt.util.Coin
-import java.math.BigInteger
-import javax.inject.Inject
-import io.usoamic.cli.util.Common.Companion.convertWeiToEth
 import java.math.BigDecimal
+import javax.inject.Inject
 
 class Swap @Inject constructor(private val usoamic: Usoamic) {
     fun withdrawEth(args: List<String>): String {

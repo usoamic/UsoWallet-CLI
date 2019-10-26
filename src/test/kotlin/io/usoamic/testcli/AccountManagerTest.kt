@@ -5,7 +5,8 @@ import io.usoamic.cli.exception.ValidateUtilException
 import io.usoamic.testcli.other.TestConfig
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.web3j.crypto.*
+import org.web3j.crypto.MnemonicUtils
+import org.web3j.crypto.WalletUtils
 import javax.inject.Inject
 
 class AccountManagerTest {
