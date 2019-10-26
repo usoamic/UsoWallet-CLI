@@ -14,7 +14,6 @@ class Help {
             add("get_uso_balance")
             add("eth_transfer <PASSWORD> <TO> <VALUE>")
             add("uso_transfer <PASSWORD> <TO> <VALUE>")
-            add("get_version")
             add("burn_uso <PASSWORD> <VALUE>")
             add("uso_balance_of <ADDRESS>")
             add("eth_balance_of <ADDRESS>")

@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "io.usoamic"
-    version = "1.0.2"
+    version = "1.0.3"
 }
 
 configure<JavaPluginConvention> {
@@ -30,17 +30,17 @@ repositories {
 
 dependencies {
     compile("org.jetbrains.kotlin", "kotlin-stdlib", "1.3.50")
-    compile("com.google.dagger", "dagger", "2.23.2")
+    compile("com.google.dagger", "dagger", "2.25.2")
     compile("com.google.code.gson", "gson", "2.8.5")
     compile("org.web3j", "core", "4.3.1")
-    compile("com.github.usoamic", "usoamickt", "v1.0.11")
-    kapt("com.google.dagger", "dagger-compiler", "2.23.2")
+    compile("com.github.usoamic", "usoamickt", "v1.1")
+    kapt("com.google.dagger", "dagger-compiler", "2.25.2")
 
-    testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", "1.3.40")
+    testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", "1.3.50")
     testCompile ("org.junit.jupiter", "junit-jupiter", "5.5.0")
-    testCompile("com.google.dagger", "dagger", "2.23.2")
-    kaptTest("com.google.dagger", "dagger-compiler", "2.23.2")
-    testAnnotationProcessor("com.google.dagger", "dagger-compiler", "2.23.2")
+    testCompile("com.google.dagger", "dagger", "2.25.2")
+    kaptTest("com.google.dagger", "dagger-compiler", "2.25.2")
+    testAnnotationProcessor("com.google.dagger", "dagger-compiler", "2.25.2")
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
@@ -65,5 +65,8 @@ val fatJar = task("fatJar", type = Jar::class) {
 tasks {
     "build" {
         dependsOn(fatJar)
+    }
+    "test"(Test::class) {
+        useJUnitPlatform()
     }
 }

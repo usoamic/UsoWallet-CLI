@@ -1,10 +1,7 @@
 package io.usoamic.testcli.di
 
 import dagger.Component
-import io.usoamic.cli.UsoWalletCli
-import io.usoamic.cli.core.Swap
 import io.usoamic.testcli.*
-import io.usoamic.testcli.di.TestCliModule
 import javax.inject.Singleton
 
 @Singleton

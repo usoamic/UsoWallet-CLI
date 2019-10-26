@@ -79,6 +79,7 @@ class UsoamicTest {
     fun burnUsoTest() {
         val value = BigDecimal("121.126")
         val balance = core.getResponse("get_uso_balance")
+
         assert(balance.toBigDecimal() >= value)
         val txHash = core.getResponse("burn_uso ${TestConfig.PASSWORD} $value")
         usoamic.waitTransactionReceipt(txHash) {
@@ -107,7 +108,7 @@ class UsoamicTest {
 
     @Test
     fun getVersionTest() {
-        val result = core.getResponse("get_version")
+        val result = core.getResponse("get_contract_version")
         assert(result == TestConfig.VERSION)
     }
 }
