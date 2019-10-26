@@ -47,3 +47,4 @@
 * get_transaction <TX_ID>
 * get_number_of_transactions
 * get_number_of_transactions_by_address <ADDRESS>
+* exit
