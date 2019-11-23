@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "io.usoamic"
-    version = "1.0.3"
+    version = "1.0.4"
 }
 
 configure<JavaPluginConvention> {
@@ -33,7 +33,7 @@ dependencies {
     compile("com.google.dagger", "dagger", "2.25.2")
     compile("com.google.code.gson", "gson", "2.8.5")
     compile("org.web3j", "core", "4.3.1")
-    compile("com.github.usoamic", "usoamickt", "v1.1")
+    compile("com.github.usoamic", "usoamickt", "v1.1.1")
     kapt("com.google.dagger", "dagger-compiler", "2.25.2")
 
     testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", "1.3.50")
