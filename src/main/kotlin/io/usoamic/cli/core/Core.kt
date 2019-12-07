@@ -5,6 +5,7 @@ import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.cli.util.removeQuotes
 import io.usoamic.cli.util.toStringIfExist
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 class Core @Inject constructor(
     private val accountManager: AccountManager,
@@ -69,6 +70,7 @@ class Core @Inject constructor(
             "get_transaction" -> transactionExplorer.getTransaction(args).toStringIfExist()
             "get_number_of_transactions" -> transactionExplorer.getNumberOfTransactions().toString()
             "get_number_of_transactions_by_address" -> transactionExplorer.getNumberOfTransactionsByAddress(args).toString()
+            "exit" -> exitProcess(0)
             else -> throw CommandNotFoundException()
         }
     }
