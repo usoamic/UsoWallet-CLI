@@ -19,7 +19,9 @@ class UsoWalletCli {
         while (input.hasNextLine()) {
             try {
                 val line = input.nextLine()
-                println(core.getResponse(line))
+                if(line.isNotEmpty()) {
+                    println(core.getResponse(line))
+                }
             }
             catch (e: Exception) {
                 when (e) {
