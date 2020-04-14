@@ -4,7 +4,7 @@ import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.util.ValidateUtil
 import io.usoamic.cli.util.getOrEmpty
 import io.usoamic.usoamickt.core.Usoamic
-import io.usoamic.usoamickt.enum.VoteType
+import io.usoamic.usoamickt.enumcls.VoteType
 import io.usoamic.usoamickt.model.Idea
 import io.usoamic.usoamickt.model.Vote
 import java.math.BigInteger

@@ -4,7 +4,7 @@ import io.usoamic.cli.core.Core
 import io.usoamic.cli.exception.ObjectNotFoundException
 import io.usoamic.testcli.other.TestConfig
 import io.usoamic.usoamickt.core.Usoamic
-import io.usoamic.usoamickt.enum.VoteType
+import io.usoamic.usoamickt.enumcls.VoteType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.math.BigInteger
