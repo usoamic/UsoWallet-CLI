@@ -6,7 +6,7 @@ import io.usoamic.usoamickt.other.Contract
 class TestConfig {
     companion object {
         const val ACCOUNT_FILENAME: String = "test_account.json"
-        val CONTRACT_ADDRESS: String = Contract.forNetwork(NetworkType.TESTNET)
+        val CONTRACT_ADDRESS: String = Contract.forNetwork(NetworkType.TestNet)
         const val DEFAULT_ADDRESS: String = "0x8b27fa2987630a1acd8d868ba84b2928de737bc2"
         const val PASSWORD: String = "1234!"
         const val VERSION: String = "v2.1.1"

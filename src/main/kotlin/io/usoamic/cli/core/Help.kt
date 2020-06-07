@@ -51,6 +51,7 @@ class Help {
             add("get_transaction <TX_ID>")
             add("get_number_of_transactions")
             add("get_number_of_transactions_by_address <ADDRESS>")
+            add("get_gas_price")
             add("exit")
         }
     }

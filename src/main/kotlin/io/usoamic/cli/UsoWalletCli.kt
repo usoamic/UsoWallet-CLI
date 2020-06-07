@@ -4,8 +4,8 @@ import io.usoamic.cli.core.Core
 import io.usoamic.cli.exception.CommandNotFoundException
 import io.usoamic.cli.exception.ContractNullPointerException
 import io.usoamic.cli.exception.ObjectNotFoundException
-import io.usoamic.usoamickt.exception.InvalidMnemonicPhraseException
-import io.usoamic.usoamickt.exception.InvalidPrivateKeyException
+import io.usoamic.validateutilkt.error.InvalidMnemonicPhraseError
+import io.usoamic.validateutilkt.error.InvalidPrivateKeyError
 import java.util.*
 import javax.inject.Inject
 
@@ -25,10 +25,10 @@ class UsoWalletCli {
             }
             catch (e: Exception) {
                 when (e) {
-                    is InvalidMnemonicPhraseException -> {
+                    is InvalidMnemonicPhraseError -> {
                         println("Invalid Mnemonic Phrase")
                     }
-                    is InvalidPrivateKeyException -> {
+                    is InvalidPrivateKeyError -> {
                         println("Invalid Private Key")
                     }
                     is ObjectNotFoundException -> {

@@ -1,6 +1,19 @@
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+object Version {
+    const val kotlinStdLib = "1.3.50"
+    const val dagger = "2.27"
+    const val gson = "2.8.5"
+    const val web3j = "4.6.0"
+    const val validateUtilKt = "16304cc35d"
+    const val javaxAnnotationApi = "1.3.2"
+    const val daggerCompiler = "2.28"
+    const val kotlinTestJunit5 = "1.3.50"
+    const val junitJupiter = "5.5.0"
+    const val usoamicKt = "v1.2.1c-SNAPSHOT"
+}
+
 plugins {
     java
     kotlin("jvm") version "1.3.50"
@@ -9,7 +22,7 @@ plugins {
 
 allprojects {
     group = "io.usoamic"
-    version = "1.0.7"
+    version = "1.0.8"
 }
 
 configure<JavaPluginConvention> {
@@ -29,18 +42,18 @@ repositories {
 }
 
 dependencies {
-    compile("org.jetbrains.kotlin", "kotlin-stdlib", "1.3.50")
-    compile("com.google.dagger", "dagger", "2.27")
-    compile("com.google.code.gson", "gson", "2.8.5")
-    compile("org.web3j", "core", "4.3.1")
-    compile("com.github.usoamic", "usoamickt", "v1.1.5")
-    kapt("com.google.dagger", "dagger-compiler", "2.27")
+    compile("org.jetbrains.kotlin", "kotlin-stdlib", Version.kotlinStdLib)
+    compile("com.google.dagger", "dagger", Version.dagger)
+    compile("com.google.code.gson", "gson", Version.gson)
+    compile("org.web3j", "core", Version.web3j)
+    compile("com.github.usoamic", "usoamickt", Version.usoamicKt)
+    kapt("com.google.dagger", "dagger-compiler", Version.dagger)
 
-    testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", "1.3.50")
-    testCompile ("org.junit.jupiter", "junit-jupiter", "5.5.0")
-    testCompile("com.google.dagger", "dagger", "2.27")
-    kaptTest("com.google.dagger", "dagger-compiler", "2.27")
-    testAnnotationProcessor("com.google.dagger", "dagger-compiler", "2.27")
+    testCompile("org.jetbrains.kotlin", "kotlin-test-junit5", Version.kotlinTestJunit5)
+    testCompile ("org.junit.jupiter", "junit-jupiter", Version.junitJupiter)
+    testCompile("com.google.dagger", "dagger", Version.dagger)
+    kaptTest("com.google.dagger", "dagger-compiler", Version.daggerCompiler)
+    testAnnotationProcessor("com.google.dagger", "dagger-compiler", Version.daggerCompiler)
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
