@@ -6,7 +6,7 @@ import io.usoamic.testcli.other.TestConfig
 import io.usoamic.usoamickt.core.Usoamic
 import io.usoamic.usoamickt.enumcls.NetworkType
 import io.usoamic.usoamickt.enumcls.NodeProvider
-import org.web3j.crypto.WalletUtils
+import io.usoamic.usoamickt.util.DirectoryUtils
 import javax.inject.Singleton
 
 @Module
@@ -16,7 +16,7 @@ class TestUsoamicModule {
     fun provideContract(): Usoamic {
         return Usoamic(
             fileName = TestConfig.ACCOUNT_FILENAME,
-            filePath = WalletUtils.getDefaultKeyDirectory(),
+            filePath = DirectoryUtils.getDefaultKeyDirectory(),
             networkType = NetworkType.TestNet,
             nodeProvider = NodeProvider.Infura(
                 TestConfig.INFURA_PROJECT_ID
