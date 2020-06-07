@@ -30,4 +30,8 @@ class TransactionExplorer @Inject constructor(private val usoamic: Usoamic) {
         }
         throw ContractNullPointerException()
     }
+
+    fun getGasPrice(): BigInteger {
+        return usoamic.getGasPrice()
+    }
 }

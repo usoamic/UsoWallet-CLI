@@ -11,7 +11,7 @@ object Version {
     const val daggerCompiler = "2.28"
     const val kotlinTestJunit5 = "1.3.50"
     const val junitJupiter = "5.5.0"
-    const val usoamicKt = "v1.2.0b3"
+    const val usoamicKt = "v1.2.1c-SNAPSHOT"
 }
 
 plugins {

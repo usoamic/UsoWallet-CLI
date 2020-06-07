@@ -70,6 +70,7 @@ class Core @Inject constructor(
             "get_transaction" -> transactionExplorer.getTransaction(args).toStringIfExist()
             "get_number_of_transactions" -> transactionExplorer.getNumberOfTransactions().toString()
             "get_number_of_transactions_by_address" -> transactionExplorer.getNumberOfTransactionsByAddress(args).toString()
+            "get_gas_price" -> transactionExplorer.getGasPrice().toString()
             "exit" -> exitProcess(0)
             else -> throw CommandNotFoundException()
         }
